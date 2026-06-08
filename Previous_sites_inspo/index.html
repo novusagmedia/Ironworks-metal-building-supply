@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ironworks Metal &amp; Building Supply | Morrill, NE</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@700;800;900&display=swap');
+
+    :root {
+      --steel:   #032A3E;
+      --blue:    #1752BF;
+      --gold:    #F8B123;
+      --silver:  #8B9CAE;
+      --cream:   #F4F1E9;
+      --dark:    #021624;
+      --white:   #FFFFFF;
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Barlow', sans-serif; background: var(--white); color: var(--steel); overflow-x: hidden; }
+
+    /* ── TICKER ── */
+    .ticker { background: var(--gold); overflow: hidden; padding: 10px 0; }
+    .ticker-track { display: flex; white-space: nowrap; animation: tickerRoll 36s linear infinite; }
+    .ticker-track span { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: .18em; text-transform: uppercase; color: var(--dark); flex-shrink: 0; }
+    @keyframes tickerRoll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--steel);
+      height: 72px; display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      border-bottom: 2px solid transparent;
+      transition: border-color .3s, background .3s;
+    }
+    nav.scrolled { border-bottom-color: var(--gold); background: rgba(3,42,62,.97); backdrop-filter: blur(10px); }
+    .nav-logo { height: 48px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 32px; list-style: none; }
+    .nav-links a { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--silver); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--white); }
+    .nav-cta {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px;
+      letter-spacing: .15em; text-transform: uppercase;
+      background: var(--gold); color: var(--dark); text-decoration: none;
+      padding: 11px 26px;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: background .2s; white-space: nowrap;
+    }
+    .nav-cta:hover { background: #e0a010; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all .3s; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .mob-menu {
+      display: none; position: fixed; top: 72px; left: 0; right: 0;
+      background: var(--steel); border-top: 2px solid var(--gold);
+      padding: 28px 48px 36px; z-index: 99;
+      flex-direction: column; gap: 20px;
+    }
+    .mob-menu.open { display: flex; }
+    .mob-menu a { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 26px; letter-spacing: .06em; text-transform: uppercase; color: var(--white); text-decoration: none; }
+    .mob-cta {
+      display: inline-block; background: var(--gold); color: var(--dark) !important;
+      padding: 12px 28px; font-size: 15px !important; margin-top: 8px; width: fit-content;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative; min-height: 100vh;
+      background: linear-gradient(135deg, var(--dark) 0%, var(--steel) 60%, #054060 100%);
+      display: flex; align-items: center; overflow: hidden;
+    }
+    .hero-geo { position: absolute; inset: 0; pointer-events: none; }
+    .hero-content {
+      position: relative; z-index: 2; padding: 0 80px; max-width: 860px;
+      opacity: 0; transform: translateY(36px);
+      animation: fadeUp .9s ease forwards .2s;
+    }
+    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(248,177,35,.12); border: 1px solid rgba(248,177,35,.3); padding: 6px 14px; margin-bottom: 24px; }
+    .hero-badge span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+    .hero-h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; line-height: .88; color: var(--white); margin-bottom: 28px; }
+    .hero-h1 .l1 { font-size: clamp(64px, 10vw, 136px); display: block; }
+    .hero-h1 .l2 { font-size: clamp(64px, 10vw, 136px); display: block; color: var(--gold); }
+    .hero-sub { font-size: 17px; color: var(--silver); max-width: 480px; line-height: 1.65; margin-bottom: 44px; }
+    .hero-ctas { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .hero-trust { display: flex; gap: 28px; margin-top: 48px; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: 8px; }
+    .trust-item span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--silver); }
+
+    /* ── BUTTONS ── */
+    .btn-gold {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px;
+      letter-spacing: .15em; text-transform: uppercase;
+      background: var(--gold); color: var(--dark);
+      border: none; padding: 14px 32px; text-decoration: none; display: inline-block; cursor: pointer;
+      clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%);
+      transition: background .2s;
+    }
+    .btn-gold:hover { background: #e0a010; }
+    .btn-outline-white {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--white); border: 1.5px solid rgba(255,255,255,.4);
+      padding: 14px 32px; text-decoration: none; display: inline-block;
+      transition: border-color .2s, color .2s;
+    }
+    .btn-outline-white:hover { border-color: var(--white); }
+    .btn-outline-gold {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--gold); border: 1.5px solid var(--gold);
+      padding: 13px 30px; text-decoration: none; display: inline-block; cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+    .btn-outline-gold:hover { background: var(--gold); color: var(--dark); }
+
+    /* ── PRODUCTS ── */
+    .products-sec { background: var(--cream); padding: 100px 48px; }
+    .sec-header { text-align: center; margin-bottom: 60px; }
+    .sec-eyebrow { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .28em; text-transform: uppercase; color: var(--blue); margin-bottom: 12px; display: block; }
+    .sec-title { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; text-transform: uppercase; letter-spacing: -.02em; line-height: .9; }
+    .sec-title.dark { color: var(--steel); }
+    .sec-title.light { color: var(--white); }
+    .sec-title.gold { color: var(--gold); }
+    .prod-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .prod-card {
+      background: var(--white); border: 1px solid rgba(3,42,62,.12);
+      padding: 36px 32px; position: relative; overflow: hidden;
+      transition: border-color .3s, transform .3s;
+    }
+    .prod-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gold); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+    .prod-card:hover { border-color: var(--gold); transform: translateY(-4px); }
+    .prod-card:hover::before { transform: scaleX(1); }
+    .prod-icon { margin-bottom: 20px; }
+    .prod-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 22px; text-transform: uppercase; color: var(--steel); letter-spacing: -.01em; margin-bottom: 10px; }
+    .prod-desc { font-size: 14px; color: #5a6a75; line-height: 1.6; }
+
+    /* ── WHY US (STATS) ── */
+    .whyus-sec {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--steel) 100%);
+      padding: 100px 48px; position: relative; overflow: hidden;
+    }
+    .whyus-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1100px; margin: 0 auto; align-items: center; }
+    .whyus-copy { position: relative; z-index: 2; }
+    .whyus-copy .sec-title { font-size: clamp(44px, 5.5vw, 80px); margin-bottom: 24px; }
+    .whyus-copy p { font-size: 16px; color: var(--silver); line-height: 1.7; margin-bottom: 36px; }
+    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; position: relative; z-index: 2; }
+    .stat-box { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); padding: 36px 32px; }
+    .stat-num { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 60px; letter-spacing: -.03em; line-height: 1; color: var(--gold); }
+    .stat-lbl { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; color: var(--silver); margin-top: 8px; }
+
+    /* ── SERVICES ── */
+    .services-sec { background: var(--cream); padding: 100px 48px; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 1100px; margin: 0 auto; }
+    .svc-card {
+      background: linear-gradient(160deg, var(--steel) 0%, var(--dark) 100%);
+      padding: 48px 36px; position: relative; overflow: hidden;
+    }
+    .svc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--gold); }
+    .svc-icon { margin-bottom: 24px; }
+    .svc-name { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 28px; text-transform: uppercase; color: var(--white); letter-spacing: -.01em; margin-bottom: 14px; line-height: .95; }
+    .svc-desc { font-size: 14px; color: var(--silver); line-height: 1.65; margin-bottom: 28px; }
+    .svc-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .svc-list li { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--gold); display: flex; align-items: center; gap: 8px; }
+    .svc-list li::before { content: '—'; color: rgba(248,177,35,.4); }
+
+    /* ── TESTIMONIALS ── */
+    .testi-sec { background: var(--white); padding: 100px 48px; }
+    .testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; }
+    .tcard { border: 1px solid rgba(3,42,62,.12); padding: 36px; position: relative; }
+    .tcard::before { content: '"'; font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 80px; line-height: 1; color: var(--gold); opacity: .15; position: absolute; top: 16px; left: 24px; }
+    .stars { display: flex; gap: 4px; margin-bottom: 18px; }
+    .star { width: 14px; height: 14px; background: var(--gold); clip-path: polygon(50% 0%,61% 35%,98% 35%,68% 57%,79% 91%,50% 70%,21% 91%,32% 57%,2% 35%,39% 35%); }
+    .ttext { font-size: 15px; font-style: italic; line-height: 1.7; color: #445; margin-bottom: 24px; }
+    .tauthor { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 16px; text-transform: uppercase; letter-spacing: .08em; color: var(--steel); }
+    .trole { font-size: 13px; color: var(--silver); margin-top: 2px; }
+
+    /* ── CTA BANNER ── */
+    .cta-sec {
+      background: linear-gradient(135deg, var(--dark) 0%, var(--steel) 100%);
+      padding: 100px 48px; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-sec .sec-title { font-size: clamp(48px, 7vw, 100px); margin-bottom: 16px; }
+    .cta-sub { font-size: 18px; color: var(--silver); margin-bottom: 20px; }
+    .cta-phone { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: clamp(36px, 5vw, 64px); color: var(--gold); text-decoration: none; letter-spacing: -.01em; display: block; margin-bottom: 36px; transition: opacity .2s; }
+    .cta-phone:hover { opacity: .85; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); padding: 72px 80px 0; }
+    .foot-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 52px; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .foot-logo { height: 56px; width: auto; display: block; margin-bottom: 14px; }
+    .foot-tag { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: var(--silver); line-height: 1.6; }
+    .foot-col h5 { font-family: 'Barlow Condensed', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+    .foot-col p, .foot-col a { font-size: 14px; color: var(--silver); line-height: 1.85; text-decoration: none; display: block; transition: color .2s; }
+    .foot-col a:hover { color: var(--white); }
+    .foot-bottom { padding: 20px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+    .foot-bottom p { font-size: 12px; color: rgba(139,156,174,.5); }
+
+    /* ── SERVICE AREA STRIP ── */
+    .area-strip { background: var(--steel); padding: 20px 48px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .area-strip span { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--silver); }
+    .area-strip .sep { color: var(--gold); }
+    .area-strip .label { color: var(--gold); }
+
+    /* ── REVEAL ── */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      nav { padding: 0 28px; }
+      .hero-content { padding: 0 32px; }
+      .prod-grid { grid-template-columns: 1fr 1fr; }
+      .svc-grid { grid-template-columns: 1fr; max-width: 520px; margin: 0 auto; }
+      .whyus-grid { grid-template-columns: 1fr; gap: 48px; }
+      .testi-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
+      .foot-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+      footer { padding: 52px 32px 0; }
+    }
+    @media (max-width: 600px) {
+      .prod-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .foot-top { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .foot-bottom { flex-direction: column; text-align: center; }
+      .products-sec, .whyus-sec, .services-sec, .testi-sec, .cta-sec { padding: 80px 24px; }
+      footer { padding: 52px 24px 0; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TICKER ── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>SERVING NE · WY · CO · SD &nbsp;·&nbsp; FREE QUOTE IN 24 HOURS &nbsp;·&nbsp; IN-HOUSE SHEET METAL ROLLING &nbsp;·&nbsp; POST-FRAME · STEEL KITS · RED IRON &nbsp;·&nbsp; LOCALLY OWNED &amp; OPERATED &nbsp;·&nbsp; 26 &amp; 29 GAUGE PANELS IN STOCK &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp; FREE QUOTE IN 24 HOURS &nbsp;·&nbsp; IN-HOUSE SHEET METAL ROLLING &nbsp;·&nbsp; POST-FRAME · STEEL KITS · RED IRON &nbsp;·&nbsp; LOCALLY OWNED &amp; OPERATED &nbsp;·&nbsp; 26 &amp; 29 GAUGE PANELS IN STOCK &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp;</span>
+    <span>SERVING NE · WY · CO · SD &nbsp;·&nbsp; FREE QUOTE IN 24 HOURS &nbsp;·&nbsp; IN-HOUSE SHEET METAL ROLLING &nbsp;·&nbsp; POST-FRAME · STEEL KITS · RED IRON &nbsp;·&nbsp; LOCALLY OWNED &amp; OPERATED &nbsp;·&nbsp; 26 &amp; 29 GAUGE PANELS IN STOCK &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp; FREE QUOTE IN 24 HOURS &nbsp;·&nbsp; IN-HOUSE SHEET METAL ROLLING &nbsp;·&nbsp; POST-FRAME · STEEL KITS · RED IRON &nbsp;·&nbsp; LOCALLY OWNED &amp; OPERATED &nbsp;·&nbsp; 26 &amp; 29 GAUGE PANELS IN STOCK &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- ── NAVBAR ── -->
+<nav id="nav">
+  <a href="#hero"><img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"></a>
+  <ul class="nav-links">
+    <li><a href="#products">Products</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get a Quote</a>
+  <button class="hamburger" id="hbg" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mob-menu" id="mobmenu">
+  <a href="#products" onclick="closeMob()">Products</a>
+  <a href="#services" onclick="closeMob()">Services</a>
+  <a href="#about"    onclick="closeMob()">About</a>
+  <a href="#contact"  onclick="closeMob()">Contact</a>
+  <a href="#contact" class="mob-cta" onclick="closeMob()">Get a Quote</a>
+</div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="hero">
+  <div class="hero-geo" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <!-- Diagonal steel beam shapes -->
+      <line x1="900" y1="0" x2="1440" y2="600" stroke="rgba(255,255,255,0.03)" stroke-width="60"/>
+      <line x1="1000" y1="0" x2="1440" y2="440" stroke="rgba(255,255,255,0.025)" stroke-width="40"/>
+      <line x1="1100" y1="0" x2="1440" y2="300" stroke="rgba(255,255,255,0.02)" stroke-width="80"/>
+      <line x1="800" y1="900" x2="1440" y2="200" stroke="rgba(248,177,35,0.04)" stroke-width="2"/>
+      <line x1="750" y1="900" x2="1440" y2="100" stroke="rgba(248,177,35,0.03)" stroke-width="1"/>
+      <!-- Grid lines suggestion -->
+      <rect x="920" y="0" width="1" height="900" fill="rgba(255,255,255,0.04)"/>
+      <rect x="1060" y="0" width="1" height="900" fill="rgba(255,255,255,0.03)"/>
+      <rect x="1200" y="0" width="1" height="900" fill="rgba(255,255,255,0.02)"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="6" r="5" stroke="#F8B123" stroke-width="1.2"/><circle cx="6" cy="6" r="2" fill="#F8B123"/></svg>
+      <span>Morrill, NE — Family Owned Since Day One</span>
+    </div>
+    <h1 class="hero-h1">
+      <span class="l1">BUILT TO LAST.</span>
+      <span class="l2">BUILT FOR YOU.</span>
+    </h1>
+    <p class="hero-sub">Metal roofing, structural steel, post-frame packages, and custom fabrication — made to order, delivered fast, priced right.</p>
+    <div class="hero-ctas">
+      <a href="#contact" class="btn-gold">Get a Free Quote</a>
+      <a href="#products" class="btn-outline-white">View Products</a>
+    </div>
+    <div class="hero-trust">
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.8 3.6L14 5.4l-3 2.9.7 4.1L8 10.3l-3.7 2.1.7-4.1L2 5.4l4.2-.8L8 1z" fill="#F8B123"/></svg>
+        <span>A+ Rated</span>
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6.5" stroke="#8B9CAE" stroke-width="1.2"/><path d="M8 4.5V8l2.5 2.5" stroke="#8B9CAE" stroke-width="1.2" stroke-linecap="round"/></svg>
+        <span>24-Hr Quotes</span>
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="12" height="12" rx="1" stroke="#8B9CAE" stroke-width="1.2"/><path d="M5 8l2 2 4-4" stroke="#8B9CAE" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span>500+ Products</span>
+      </div>
+      <div class="trust-item">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2C5.239 2 3 4.239 3 7c0 4 5 7 5 7s5-3 5-7c0-2.761-2.239-5-5-5z" stroke="#8B9CAE" stroke-width="1.2"/><circle cx="8" cy="7" r="1.5" stroke="#8B9CAE" stroke-width="1.2"/></svg>
+        <span>NE · WY · CO · SD</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICE AREA STRIP ── -->
+<div class="area-strip">
+  <span class="label">Serving:</span>
+  <span>Nebraska</span><span class="sep">·</span>
+  <span>Wyoming</span><span class="sep">·</span>
+  <span>Colorado</span><span class="sep">·</span>
+  <span>South Dakota</span>
+  <span class="sep">|</span>
+  <span>In-House Sheet Metal Rolling</span><span class="sep">·</span>
+  <span>Panels Made to Order Locally</span>
+</div>
+
+<!-- ── PRODUCTS ── -->
+<section class="products-sec" id="products">
+  <div class="sec-header rv">
+    <span class="sec-eyebrow">What We Supply</span>
+    <h2 class="sec-title dark" style="font-size:clamp(48px,6vw,80px)">Our Products</h2>
+  </div>
+  <div class="prod-grid">
+    <div class="prod-card rv">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect x="4" y="10" width="32" height="4" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <rect x="4" y="18" width="32" height="4" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <rect x="4" y="26" width="32" height="4" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <rect x="10" y="6" width="4" height="28" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+          <rect x="26" y="6" width="4" height="28" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-name">PBR / R-Panel Roofing</div>
+      <div class="prod-desc">26 &amp; 29 gauge. The industry standard for commercial and agricultural roofing — in stock and made to order.</div>
+    </div>
+    <div class="prod-card rv d1">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M4 32 L20 8 L36 32 Z" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <path d="M4 32h32" stroke="#F8B123" stroke-width="1.2"/>
+          <path d="M12 32L20 18l8 14" stroke="#032A3E" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-name">AG Panels</div>
+      <div class="prod-desc">26 &amp; 29 gauge agricultural panels. Durable, weather-resistant, and trusted across the region.</div>
+    </div>
+    <div class="prod-card rv d2">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect x="6" y="8" width="8" height="24" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <rect x="26" y="8" width="8" height="24" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <rect x="14" y="14" width="12" height="4" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+          <rect x="14" y="22" width="12" height="4" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-name">Post-Frame Packages</div>
+      <div class="prod-desc">Complete post-frame building packages engineered for agricultural, commercial, and residential use.</div>
+    </div>
+    <div class="prod-card rv">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect x="4" y="14" width="32" height="12" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <line x1="4" y1="20" x2="36" y2="20" stroke="#032A3E" stroke-width="1"/>
+          <rect x="4" y="14" width="10" height="12" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-name">Cold-Form Steel Kits</div>
+      <div class="prod-desc">Engineered cold-form steel framing kits for efficient, reliable building construction at any scale.</div>
+    </div>
+    <div class="prod-card rv d1">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M8 8h24v6H8z" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <path d="M8 14h24v12H8z" stroke="#032A3E" stroke-width="1.2" fill="none"/>
+          <path d="M8 26h24v6H8z" stroke="#F8B123" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="prod-name">Red Iron Packages</div>
+      <div class="prod-desc">Pre-engineered red iron structural steel packages — the backbone of commercial and industrial buildings.</div>
+    </div>
+    <div class="prod-card rv d2">
+      <div class="prod-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="10" stroke="#032A3E" stroke-width="1.4" fill="none"/>
+          <path d="M14 20h12M20 14v12" stroke="#F8B123" stroke-width="1.2" stroke-linecap="round"/>
+          <path d="M20 6v4M20 30v4M6 20h4M30 20h4" stroke="#032A3E" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="prod-name">Custom Trim &amp; Hardware</div>
+      <div class="prod-desc">Custom trim profiles, fasteners, concrete, and hardware. Everything you need to finish the job right.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── WHY US ── -->
+<section class="whyus-sec" id="about">
+  <div class="whyus-grid">
+    <div class="whyus-copy rv">
+      <span class="sec-eyebrow" style="color:var(--gold)">Why Choose Ironworks</span>
+      <h2 class="sec-title light" style="font-size:clamp(44px,5.5vw,76px)">THE IRONWORKS<br>DIFFERENCE</h2>
+      <p>Spencer Bush and the Ironworks team bring hands-on building experience to every order. We're not just a supplier — we're contractors who understand what you actually need on the job site.</p>
+      <a href="#contact" class="btn-outline-gold">Talk to Our Team</a>
+    </div>
+    <div class="stats-grid rv d1">
+      <div class="stat-box">
+        <div class="stat-num" data-to="20" data-sfx="+">0</div>
+        <div class="stat-lbl">Years Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" data-to="500" data-sfx="+">0</div>
+        <div class="stat-lbl">Products In Stock</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" data-to="24" data-sfx="hr">0</div>
+        <div class="stat-lbl">Quote Turnaround</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num" data-to="4" data-sfx="">0</div>
+        <div class="stat-lbl">States Served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVICES ── -->
+<section class="services-sec" id="services">
+  <div class="sec-header rv">
+    <span class="sec-eyebrow">What We Do</span>
+    <h2 class="sec-title dark" style="font-size:clamp(48px,6vw,80px)">Our Services</h2>
+  </div>
+  <div class="svc-grid">
+    <div class="svc-card rv">
+      <div class="svc-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect x="4" y="16" width="32" height="18" stroke="white" stroke-width="1.4" fill="none"/>
+          <path d="M4 16L20 6l16 10" stroke="#F8B123" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+          <rect x="16" y="24" width="8" height="10" stroke="white" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="svc-name">Commercial Supply</div>
+      <div class="svc-desc">Large-scale commercial projects need a supplier who can deliver the right product on time, every time.</div>
+      <ul class="svc-list">
+        <li>Red iron & cold-form steel</li>
+        <li>Volume pricing available</li>
+        <li>Project consultation</li>
+        <li>3D design services</li>
+      </ul>
+    </div>
+    <div class="svc-card rv d1">
+      <div class="svc-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <path d="M6 34V18L20 8l14 10v16H6z" stroke="white" stroke-width="1.4" fill="none" stroke-linejoin="round"/>
+          <path d="M16 34v-9h8v9" stroke="white" stroke-width="1.2" fill="none"/>
+          <path d="M6 18h28" stroke="#F8B123" stroke-width="1"/>
+        </svg>
+      </div>
+      <div class="svc-name">Residential Projects</div>
+      <div class="svc-desc">From homestead shops to agricultural buildings — durable materials for the projects that matter most.</div>
+      <ul class="svc-list">
+        <li>Post-frame packages</li>
+        <li>Metal roofing & panels</li>
+        <li>Ag buildings & shops</li>
+        <li>Custom trim & finish</li>
+      </ul>
+    </div>
+    <div class="svc-card rv d2">
+      <div class="svc-icon">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <circle cx="20" cy="20" r="12" stroke="white" stroke-width="1.4" fill="none"/>
+          <path d="M20 8v4M20 28v4M8 20h4M28 20h4" stroke="#F8B123" stroke-width="1.2" stroke-linecap="round"/>
+          <circle cx="20" cy="20" r="4" stroke="white" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <div class="svc-name">Custom Metal Work</div>
+      <div class="svc-desc">Our in-house sheet metal roller sets us apart — custom panels and trim profiles made to your exact specs.</div>
+      <ul class="svc-list">
+        <li>In-house metal rolling</li>
+        <li>Custom panel profiles</li>
+        <li>Made-to-order locally</li>
+        <li>Fast turnaround</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ── TESTIMONIALS ── -->
+<section class="testi-sec">
+  <div class="sec-header rv">
+    <span class="sec-eyebrow">From Our Customers</span>
+    <h2 class="sec-title dark" style="font-size:clamp(44px,5.5vw,72px)">What Contractors Say</h2>
+  </div>
+  <div class="testi-grid">
+    <div class="tcard rv">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="ttext">"Ironworks is the only supplier I trust for my commercial roofing jobs. Their PBR panels are always in spec and they turn quotes around faster than anyone."</p>
+      <div class="tauthor">Mike D.</div>
+      <div class="trole">Commercial Contractor, Scottsbluff NE</div>
+    </div>
+    <div class="tcard rv d1">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="ttext">"We built a 60x120 ag shop with their post-frame package. Spencer walked us through every detail. Quality material, honest price."</p>
+      <div class="tauthor">Brad T.</div>
+      <div class="trole">Farmer, Morrill NE</div>
+    </div>
+    <div class="tcard rv d2">
+      <div class="stars"><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div><div class="star"></div></div>
+      <p class="ttext">"The custom trim work they did for our project was perfect — matched spec exactly. That in-house roller is a game changer."</p>
+      <div class="tauthor">Rachel S.</div>
+      <div class="trole">General Contractor, Cheyenne WY</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA BANNER ── -->
+<section class="cta-sec" id="contact">
+  <div style="position:relative;z-index:2">
+    <span class="sec-eyebrow" style="color:var(--gold)" class="rv">Ready to Build?</span>
+    <h2 class="sec-title light rv" style="font-size:clamp(52px,8vw,108px)">GET YOUR<br><span style="color:var(--gold)">FREE QUOTE</span></h2>
+    <p class="cta-sub rv">Call us or email — we turn quotes around in 24 hours.</p>
+    <a href="tel:3086723891" class="cta-phone rv">(308) 672-3891</a>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap" class="rv">
+      <a href="mailto:ironworksmetalbuildingsupply@gmail.com" class="btn-outline-white">Email Us</a>
+      <a href="#products" class="btn-gold">View All Products</a>
+    </div>
+    <p style="margin-top:28px;font-size:13px;color:var(--silver)" class="rv">30101 County Road 9, Morrill, NE 69358</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-top">
+    <div>
+      <img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="foot-logo">
+      <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <p>30101 County Road 9<br>Morrill, NE 69358</p>
+      <p style="margin-top:10px"><a href="tel:3086723891">(308) 672-3891</a></p>
+      <p><a href="mailto:ironworksmetalbuildingsupply@gmail.com">ironworksmetalbuildingsupply<br>@gmail.com</a></p>
+    </div>
+    <div class="foot-col">
+      <h5>Products</h5>
+      <a href="#products">PBR / R-Panel</a>
+      <a href="#products">AG Panels</a>
+      <a href="#products">Post-Frame Packages</a>
+      <a href="#products">Cold-Form Steel</a>
+      <a href="#products">Red Iron Packages</a>
+    </div>
+    <div class="foot-col">
+      <h5>Quick Links</h5>
+      <a href="#products">Products</a>
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#contact">Get a Quote</a>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2025 Ironworks Metal &amp; Building Supply &middot; All Rights Reserved</p>
+    <p>Built by Novus AG Media</p>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+  // Hamburger
+  const hbg = document.getElementById('hbg'), mob = document.getElementById('mobmenu');
+  hbg.addEventListener('click', () => { hbg.classList.toggle('open'); mob.classList.toggle('open'); });
+  function closeMob() { hbg.classList.remove('open'); mob.classList.remove('open'); }
+  document.addEventListener('click', e => { if (!nav.contains(e.target) && !mob.contains(e.target)) closeMob(); });
+
+  // Reveal on scroll
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); revealObs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => revealObs.observe(el));
+
+  // Count-up (once)
+  let counted = false;
+  const counters = document.querySelectorAll('.stat-num[data-to]');
+  const countObs = new IntersectionObserver(entries => {
+    if (!counted && entries.some(e => e.isIntersecting)) {
+      counted = true;
+      counters.forEach(el => {
+        const target = +el.dataset.to, sfx = el.dataset.sfx || '';
+        if (target <= 4) { el.textContent = target + sfx; return; }
+        const inc = target / (1800 / (1000/60));
+        let cur = 0;
+        const tick = setInterval(() => {
+          cur += inc;
+          if (cur >= target) { cur = target; clearInterval(tick); }
+          el.textContent = Math.floor(cur) + sfx;
+        }, 1000/60);
+      });
+    }
+  }, { threshold: 0.4 });
+  counters.forEach(el => countObs.observe(el));
+</script>
+</body>
+</html>

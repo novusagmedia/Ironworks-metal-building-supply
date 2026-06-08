@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer/.claude\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer/.claude/skills\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer/.claude/skills/video-to-website\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer/.claude/skills/frontend-design\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer/.claude/skills/skill-builder\")",
+      "Bash(npm --version)",
+      "Bash(npm init *)",
+      "Bash(npm install *)",
+      "Bash(node -e \"const p = require\\('puppeteer'\\); console.log\\(p.executablePath ? p.executablePath\\(\\) : 'no executablePath'\\)\")",
+      "Bash(node -e \"import\\('puppeteer'\\).then\\(p => console.log\\(p.default.executablePath\\(\\)\\)\\)\")",
+      "Read(//Users/giussepeshunaula/.cache/puppeteer/**)",
+      "Read(//Users/giussepeshunaula/3d website for spencer /Brand_assets/**)",
+      "Read(//Users/giussepeshunaula/3d website for spencer /Previous_sites_inspo/**)",
+      "Read(//Users/giussepeshunaula/3d website for spencer /Structure/**)",
+      "Bash(cp -r \"/Users/giussepeshunaula/3d website for spencer/.claude\" \"/Users/giussepeshunaula/3d website for spencer /\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/CLAUDE.md\" \"/Users/giussepeshunaula/3d website for spencer /\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/serve.mjs\" \"/Users/giussepeshunaula/3d website for spencer /\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/screenshot.mjs\" \"/Users/giussepeshunaula/3d website for spencer /\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/package.json\" \"/Users/giussepeshunaula/3d website for spencer /\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/CLAUDE.md\" \"/Users/giussepeshunaula/3d website for spencer /CLAUDE.md\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/serve.mjs\" \"/Users/giussepeshunaula/3d website for spencer /serve.mjs\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/screenshot.mjs\" \"/Users/giussepeshunaula/3d website for spencer /screenshot.mjs\")",
+      "Bash(cp \"/Users/giussepeshunaula/3d website for spencer/package.json\" \"/Users/giussepeshunaula/3d website for spencer /package.json\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer /temporary screenshots\")",
+      "Bash(mkdir -p \"/Users/giussepeshunaula/3d website for spencer /css\" \"/Users/giussepeshunaula/3d website for spencer /js\")",
+      "Bash(node serve.mjs)",
+      "Bash(node screenshot.mjs http://localhost:3000 homepage)"
+    ],
+    "additionalDirectories": [
+      "/Users/giussepeshunaula/3d website for spencer",
+      "/Users/giussepeshunaula/3d website for spencer/.claude",
+      "/Users/giussepeshunaula/3d website for spencer/.claude/skills",
+      "/Users/giussepeshunaula/3d website for spencer ",
+      "/Users/giussepeshunaula/3d website for spencer /css",
+      "/Users/giussepeshunaula/3d website for spencer /js"
+    ]
+  }
+}
