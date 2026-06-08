@@ -1,0 +1,110 @@
+﻿We’ll build ONE primary flow:
+HOME → 3D DESIGNER → QUALIFY → QUOTE CALL
+Everything else is support.
+________________
+
+
+1. Navigation & Global Structure
+New top nav:
+* Logo (click = Home)
+* What We Build
+* Panels & Trim
+* Who We Serve
+* Gallery
+* About
+* 3D Designer (highlighted)
+* Button: Get a Code‑Compliant Quote
+
+
+Make “3D Designer” and “Get a Quote” the two most obvious CTAs. That’s your hook: design your dream, then we price it – a strong verbal hook + implied value. 
+________________
+2. Home Page: Built Around the 3D Tool
+Hero (above the fold)
+Headline:
+“Design Your Metal Building in 3D – Built for YOUR Zip Code, Not Big‑Box Guesswork”
+Subhead:
+“Local, code‑compliant buildings and steel panels within 300 miles of Scottsbluff. Design it in minutes, then talk to a real builder to get pricing and options.”
+Buttons:
+* Primary: Design Your Building in 3D
+* Secondary: Get a Code‑Compliant Quote
+Background: full‑width photo or looped video of a real Ironworks building.
+Section: How It Works (tie the 3D tool into the funnel)
+Three steps, visual:
+1. Design It
+“Use our 3D tool (same one the big national brands use) to lay out your building.”
+2. Tell Us Where & When
+“Enter your zip code, timeline, and a few details so we can engineer for your area.”
+3. Review With a Local Builder
+“We call you, review your design, and give you a code‑compliant quote with options.”
+CTA button under this: Start Your 3D Design
+Section: What We Build (cards)
+Three clickable cards:
+   * Post‑Frame Buildings
+   * Cold‑Form Steel Kits
+   * Red‑Iron Buildings
+Each card: 2–3 bullets + “See Examples” & “Design in 3D”.
+Section: Built Locally. Engineered for Your Zip.
+3 columns:
+   * Engineered for local wind & snow loads
+   * Panels & trim rolled in‑house
+   * Fast turnaround + delivery
+CTA: See If We Serve Your Area
+Section: Who We Serve
+Split:
+   * Contractors (roofers, builders, lumber yards)
+   * Ranchers & Ag Producers
+   * Rural Landowners
+Each: why Ironworks is better for them. Button: Get Contractor Pricing or Design Your Building
+Section: Gallery & Testimonials
+Use his best photos + 2–3 strongest quotes already on the site. (ironworksmetalbuildingsupply.com)
+CTA: Like What You See? Start Your 3D Design
+
+
+
+
+
+
+
+
+________________
+
+
+3. Dedicated “3D Designer” Page (Core Asset)
+URL: /3d-designer
+Top section
+Headline:
+“Design Your Building in 3D – Then Have a Local Pro Make It Real”
+Subhead:
+“Use our 3D tool to play with sizes, doors, colors, and layouts. When you’re happy with it, send it to us and we’ll engineer it for your zip code and give you real pricing.”
+Big button: Launch 3D Designer
+Embed the configurator (iframe / external link) inside this page, not just as a naked off‑site link like it is now. (ironworksmetalbuildingsupply.com)
+Under the 3D tool: “Lock In Your Design & Get Pricing”
+Short form that appears right under or after the tool:
+   * Name
+   * Phone
+   * Email
+   * Zip code
+   * Do you own the land? (Yes/No)
+   * When are you planning to build?
+   * 0–3 months
+   * 3–6 months
+   * 6+ months / just looking
+   * What type of building did you design?
+   * Shop / Garage
+   * Ag / Barn
+   * Commercial
+Last field:
+“Anything specific you want us to know about this design?”
+CTA button: Send My Design to Ironworks
+Thank‑you state:
+   * “Got it. Spencer’s team will review your design and call you within 1 business day to go over options and pricing. If you’d like to talk sooner, call [PHONE].”
+This is your “calculator‑based sale” pattern from the trades notes: the tool gets them engaged, the form qualifies, the call closes.
+________________
+
+
+4. Replace the Google Form With a Real “Get a Quote” Page
+Right now he’s sending people to a Google “Customer Questioner” form. (ironworksmetalbuildingsupply.com)
+Move all that into a proper on‑site /get-a-quote page using the qualification questions we already defined (zip, land, timing, budget, type, contractor vs owner).
+Tie that page into both:
+   * Sitewide “Get a Quote” button
+   * “Finished your 3D design?” prompts

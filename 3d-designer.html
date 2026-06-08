@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Building Designer | Ironworks Metal & Building Supply</title>
+  <meta name="description" content="Design your metal building in 3D. Post-frame, cold-form steel, or red iron — configure your building in minutes, then get a code-compliant quote from a local builder."/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── TICKER ── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>DESIGN YOUR BUILDING IN 3D &nbsp;·&nbsp; POST-FRAME · COLD-FORM · RED IRON &nbsp;·&nbsp; LOCAL ENGINEERING FOR YOUR ZIP CODE &nbsp;·&nbsp; QUOTES IN 24 HOURS &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp;</span>
+    <span>DESIGN YOUR BUILDING IN 3D &nbsp;·&nbsp; POST-FRAME · COLD-FORM · RED IRON &nbsp;·&nbsp; LOCAL ENGINEERING FOR YOUR ZIP CODE &nbsp;·&nbsp; QUOTES IN 24 HOURS &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="site-nav" id="site-nav">
+  <a href="index.html">
+    <img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#what-we-build">What We Build</a></li>
+    <li><a href="index.html#what-we-build">Panels &amp; Trim</a></li>
+    <li><a href="index.html#who-we-serve">Who We Serve</a></li>
+    <li><a href="index.html#testimonials">Gallery</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="3d-designer.html" class="highlight">3D Designer</a></li>
+  </ul>
+  <a href="get-a-quote.html" class="nav-cta">Get a Code-Compliant Quote</a>
+  <button class="hamburger" id="hbg" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mob-menu">
+  <a href="index.html#what-we-build">What We Build</a>
+  <a href="index.html#what-we-build">Panels &amp; Trim</a>
+  <a href="index.html#who-we-serve">Who We Serve</a>
+  <a href="index.html#testimonials">Gallery</a>
+  <a href="index.html#about">About</a>
+  <a href="3d-designer.html" class="highlight">3D Designer</a>
+  <a href="get-a-quote.html" class="mob-menu-cta">Get a Code-Compliant Quote</a>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow">3D Building Designer</span>
+    <h1 class="sec-title on-dark">Design Your Building<br><em style="font-style:normal;color:var(--gold)">in 3D</em></h1>
+    <p>Use our 3D tool to play with sizes, doors, colors, and layouts. When you're happy with it, fill out the form below and we'll engineer it for your zip code with real pricing.</p>
+  </div>
+</section>
+
+<!-- ── 3D TOOL EMBED ── -->
+<section class="designer-embed">
+  <iframe
+    src="https://ironworksmetalbuildingsupply.actbuildingsystems.com/"
+    frameborder="0"
+    allowfullscreen
+    allow="fullscreen"
+    title="Ironworks 3D Building Designer"
+    style="width:100%;max-width:1200px;height:740px;border:2px solid rgba(248,177,35,.2);display:block;"
+  ></iframe>
+</section>
+
+<!-- ── LEAD CAPTURE FORM ── -->
+<section class="form-section" style="background:var(--cream)">
+  <div class="form-wrap">
+    <div class="section-header rv" style="text-align:left;margin-bottom:40px">
+      <span class="eyebrow dark">Lock In Your Design</span>
+      <h2 class="sec-title on-light" style="font-size:clamp(36px,5vw,64px)">Get Pricing &amp;<br>Options</h2>
+      <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-top:16px;max-width:480px">
+        Send your design to Ironworks. Spencer's team will review it and call you within 1 business day to go over options and pricing.
+      </p>
+    </div>
+
+    <div id="designer-success" class="success-msg">
+      <h3>Got it. We're on it.</h3>
+      <p>Spencer's team will review your design and call you within 1 business day to go over options and pricing.<br><br>
+      Want to talk sooner? Call us at <strong><a href="tel:3086723891" style="color:var(--iron)">(308) 672-3891</a></strong>.</p>
+    </div>
+
+    <form id="designer-form" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="d-name">Your Name *</label>
+          <input type="text" id="d-name" name="name" placeholder="Full name" required/>
+        </div>
+        <div class="form-group">
+          <label for="d-phone">Phone Number *</label>
+          <input type="tel" id="d-phone" name="phone" placeholder="(555) 000-0000" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="d-email">Email Address *</label>
+          <input type="email" id="d-email" name="email" placeholder="you@email.com" required/>
+        </div>
+        <div class="form-group">
+          <label for="d-zip">Zip Code *</label>
+          <input type="text" id="d-zip" name="zip" placeholder="Your zip code" maxlength="10" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Do you own the land?</label>
+        <div class="radio-group" style="flex-direction:row;gap:28px">
+          <label class="radio-option">
+            <input type="radio" name="owns-land" value="yes"/>
+            <span>Yes, I own it</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="owns-land" value="no"/>
+            <span>Not yet</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="d-timeline">When are you planning to build?</label>
+        <select id="d-timeline" name="timeline">
+          <option value="">Select a timeline</option>
+          <option value="0-3">0–3 months</option>
+          <option value="3-6">3–6 months</option>
+          <option value="6+">6+ months / just exploring</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="d-type">What type of building did you design?</label>
+        <select id="d-type" name="building-type">
+          <option value="">Select building type</option>
+          <option value="shop-garage">Shop / Garage</option>
+          <option value="ag-barn">Ag / Barn</option>
+          <option value="commercial">Commercial</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="d-notes">Anything specific you want us to know about this design?</label>
+        <textarea id="d-notes" name="notes" placeholder="Dimensions, special requirements, questions..."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-gold" style="font-size:14px;padding:18px 48px">Send My Design to Ironworks</button>
+        <p class="form-note">We'll call you within 1 business day. No spam, no pressure.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── TRUST STRIP ── -->
+<section class="stats-dark" style="padding:60px 48px">
+  <div class="stats-row">
+    <div class="stat-item">
+      <div class="stat-number"><span>24</span><span class="sfx">hr</span></div>
+      <div class="stat-label">Quote Turnaround</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span>300</span><span class="sfx">mi</span></div>
+      <div class="stat-label">Service Radius</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span>20</span><span class="sfx">+</span></div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number"><span>4</span><span class="sfx"></span></div>
+      <div class="stat-label">States Served</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <p class="foot-tagline">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <p>30101 County Road 9<br>Morrill, NE 69358</p>
+      <a href="tel:3086723891" style="margin-top:10px">(308) 672-3891</a>
+      <a href="mailto:ironworksmetalbuildingsupply@gmail.com">ironworksmetalbuildingsupply@gmail.com</a>
+    </div>
+    <div class="foot-col">
+      <h5>Quick Links</h5>
+      <a href="index.html">Home</a>
+      <a href="index.html#what-we-build">What We Build</a>
+      <a href="3d-designer.html">3D Designer</a>
+      <a href="get-a-quote.html">Get a Quote</a>
+    </div>
+    <div class="foot-col">
+      <h5>Service Area</h5>
+      <p>Nebraska</p>
+      <p>Wyoming</p>
+      <p>Colorado</p>
+      <p>South Dakota</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2025 Ironworks Metal &amp; Building Supply · All Rights Reserved</p>
+    <p>Built by Novus AG Media</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+node_modules/
+temporary screenshots/
+.DS_Store
+frames/
+Real_video/
+Previous_sites_inspo/
+package-lock.json

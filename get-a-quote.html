@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Get a Code-Compliant Quote | Ironworks Metal & Building Supply</title>
+  <meta name="description" content="Get a code-compliant metal building quote from Ironworks. Local engineering for NE, WY, CO, and SD. Quotes in 24 hours."/>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<!-- ── TICKER ── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>FREE CODE-COMPLIANT QUOTES &nbsp;·&nbsp; TURNAROUND IN 24 HOURS &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; LOCAL ENGINEERING FOR YOUR ZIP CODE &nbsp;·&nbsp; IN-HOUSE METAL ROLLING &nbsp;·&nbsp;</span>
+    <span>FREE CODE-COMPLIANT QUOTES &nbsp;·&nbsp; TURNAROUND IN 24 HOURS &nbsp;·&nbsp; SERVING NE · WY · CO · SD &nbsp;·&nbsp; CALL (308) 672-3891 &nbsp;·&nbsp; LOCAL ENGINEERING FOR YOUR ZIP CODE &nbsp;·&nbsp; IN-HOUSE METAL ROLLING &nbsp;·&nbsp;</span>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav class="site-nav" id="site-nav">
+  <a href="index.html">
+    <img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#what-we-build">What We Build</a></li>
+    <li><a href="index.html#what-we-build">Panels &amp; Trim</a></li>
+    <li><a href="index.html#who-we-serve">Who We Serve</a></li>
+    <li><a href="index.html#testimonials">Gallery</a></li>
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="3d-designer.html" class="highlight">3D Designer</a></li>
+  </ul>
+  <a href="get-a-quote.html" class="nav-cta">Get a Code-Compliant Quote</a>
+  <button class="hamburger" id="hbg" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mob-menu" id="mob-menu">
+  <a href="index.html#what-we-build">What We Build</a>
+  <a href="index.html#what-we-build">Panels &amp; Trim</a>
+  <a href="index.html#who-we-serve">Who We Serve</a>
+  <a href="index.html#testimonials">Gallery</a>
+  <a href="index.html#about">About</a>
+  <a href="3d-designer.html" class="highlight">3D Designer</a>
+  <a href="get-a-quote.html" class="mob-menu-cta">Get a Code-Compliant Quote</a>
+</div>
+
+<!-- ── PAGE HERO ── -->
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <span class="eyebrow">Free Quote</span>
+    <h1 class="sec-title on-dark">Get a Code-Compliant<br><em style="font-style:normal;color:var(--gold)">Quote</em></h1>
+    <p>Fill out the form below. We'll review your project and call you within 1 business day with options and real pricing — engineered for your zip code, not national guesses.</p>
+  </div>
+</section>
+
+<!-- ── QUOTE FORM ── -->
+<section class="form-section">
+  <div class="form-wrap">
+
+    <div id="success-msg" class="success-msg">
+      <h3>Got it. We'll be in touch.</h3>
+      <p>Spencer's team will review your project and call you within 1 business day.<br><br>
+      Want to talk sooner? Call us directly at <strong><a href="tel:3086723891" style="color:var(--iron)">(308) 672-3891</a></strong> or email <a href="mailto:ironworksmetalbuildingsupply@gmail.com" style="color:var(--iron)">ironworksmetalbuildingsupply@gmail.com</a>.</p>
+    </div>
+
+    <form id="quote-form" novalidate>
+
+      <!-- CONTACT INFO -->
+      <p style="font-family:var(--font-condensed);font-weight:700;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--iron-mid);margin-bottom:20px">Contact Information</p>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="q-name">Your Name *</label>
+          <input type="text" id="q-name" name="name" placeholder="Full name" required/>
+        </div>
+        <div class="form-group">
+          <label for="q-phone">Phone Number *</label>
+          <input type="tel" id="q-phone" name="phone" placeholder="(555) 000-0000" required/>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="q-email">Email Address</label>
+          <input type="email" id="q-email" name="email" placeholder="you@email.com"/>
+        </div>
+        <div class="form-group">
+          <label for="q-zip">Project Zip Code *</label>
+          <input type="text" id="q-zip" name="zip" placeholder="Where will you build?" maxlength="10" required/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="q-role">I am a…</label>
+        <select id="q-role" name="role">
+          <option value="">Select your role</option>
+          <option value="owner">Property Owner / Homeowner</option>
+          <option value="farmer-rancher">Farmer / Rancher</option>
+          <option value="contractor">General Contractor</option>
+          <option value="roofer">Roofer / Subcontractor</option>
+          <option value="commercial">Commercial Developer</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <!-- DIVIDER -->
+      <hr style="border:none;border-top:1px solid rgba(3,42,62,.1);margin:32px 0"/>
+      <p style="font-family:var(--font-condensed);font-weight:700;font-size:11px;letter-spacing:.25em;text-transform:uppercase;color:var(--iron-mid);margin-bottom:20px">Project Details</p>
+
+      <div class="form-group">
+        <label for="q-type">What type of building do you need?</label>
+        <select id="q-type" name="building-type">
+          <option value="">Select building type</option>
+          <option value="post-frame">Post-Frame Building</option>
+          <option value="cold-form">Cold-Form Steel Kit</option>
+          <option value="red-iron">Red Iron Building</option>
+          <option value="panels-only">Panels &amp; Trim Only</option>
+          <option value="not-sure">Not sure yet</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="q-width">Approximate Width (ft)</label>
+          <input type="text" id="q-width" name="width" placeholder="e.g. 40"/>
+        </div>
+        <div class="form-group">
+          <label for="q-length">Approximate Length (ft)</label>
+          <input type="text" id="q-length" name="length" placeholder="e.g. 60"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Do you own the land?</label>
+        <div class="radio-group" style="flex-direction:row;gap:28px">
+          <label class="radio-option">
+            <input type="radio" name="owns-land" value="yes"/>
+            <span>Yes, I own it</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="owns-land" value="no"/>
+            <span>Not yet</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="q-timeline">When are you planning to build?</label>
+        <select id="q-timeline" name="timeline">
+          <option value="">Select a timeline</option>
+          <option value="0-3">0–3 months</option>
+          <option value="3-6">3–6 months</option>
+          <option value="6+">6+ months / just exploring</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="q-budget">Approximate budget (optional)</label>
+        <select id="q-budget" name="budget">
+          <option value="">Prefer not to say</option>
+          <option value="under-25k">Under $25,000</option>
+          <option value="25k-50k">$25,000 – $50,000</option>
+          <option value="50k-100k">$50,000 – $100,000</option>
+          <option value="100k-plus">$100,000+</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="q-notes">Project details &amp; questions</label>
+        <textarea id="q-notes" name="notes" placeholder="Tell us anything helpful — location specifics, special requirements, what you're building it for..."></textarea>
+      </div>
+
+      <div class="form-submit">
+        <button type="submit" class="btn-gold" style="font-size:14px;padding:18px 52px">Request My Code-Compliant Quote</button>
+        <p class="form-note">We'll call you within 1 business day. No spam, no pressure, no obligation.</p>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ── WHY US QUICK ── -->
+<section style="background:var(--cream);padding:80px 48px">
+  <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:28px">
+    <div class="rv" style="padding:36px;background:var(--white);border:1px solid rgba(3,42,62,.08)">
+      <div style="font-family:var(--font-display);font-weight:900;font-size:48px;color:var(--gold);letter-spacing:-.04em;line-height:1">24hr</div>
+      <div style="font-family:var(--font-condensed);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);margin-top:6px">Quote Turnaround</div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-top:12px">We get back to every inquiry within one business day — no waiting weeks for a number.</p>
+    </div>
+    <div class="rv d1" style="padding:36px;background:var(--white);border:1px solid rgba(3,42,62,.08)">
+      <div style="font-family:var(--font-display);font-weight:900;font-size:48px;color:var(--gold);letter-spacing:-.04em;line-height:1">Local</div>
+      <div style="font-family:var(--font-condensed);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);margin-top:6px">Engineering</div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-top:12px">Your quote is engineered for your zip code — local wind loads, snow loads, and code compliance. Not generic national specs.</p>
+    </div>
+    <div class="rv d2" style="padding:36px;background:var(--white);border:1px solid rgba(3,42,62,.08)">
+      <div style="font-family:var(--font-display);font-weight:900;font-size:48px;color:var(--gold);letter-spacing:-.04em;line-height:1">Real</div>
+      <div style="font-family:var(--font-condensed);font-weight:700;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--silver);margin-top:6px">Builder Pricing</div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7;margin-top:12px">Spencer and his team have built hundreds of projects. You get pricing from someone who's actually done the work — not a call center.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <img src="Brand_assets/IronWorks Logo.jpg" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <p class="foot-tagline">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
+    </div>
+    <div class="foot-col">
+      <h5>Contact</h5>
+      <p>30101 County Road 9<br>Morrill, NE 69358</p>
+      <a href="tel:3086723891" style="margin-top:10px">(308) 672-3891</a>
+      <a href="mailto:ironworksmetalbuildingsupply@gmail.com">ironworksmetalbuildingsupply@gmail.com</a>
+    </div>
+    <div class="foot-col">
+      <h5>Quick Links</h5>
+      <a href="index.html">Home</a>
+      <a href="index.html#what-we-build">What We Build</a>
+      <a href="3d-designer.html">3D Designer</a>
+      <a href="get-a-quote.html">Get a Quote</a>
+    </div>
+    <div class="foot-col">
+      <h5>Service Area</h5>
+      <p>Nebraska</p>
+      <p>Wyoming</p>
+      <p>Colorado</p>
+      <p>South Dakota</p>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <p>&copy; 2025 Ironworks Metal &amp; Building Supply · All Rights Reserved</p>
+    <p>Built by Novus AG Media</p>
+  </div>
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
