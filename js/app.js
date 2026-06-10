@@ -69,15 +69,43 @@ if (counterEls.length) {
   counterEls.forEach(el => counterObs.observe(el));
 }
 
+/* ── FORMSPREE SUBMIT HELPER ── */
+async function submitToFormspree(form, successId) {
+  const btn = form.querySelector('[type="submit"]');
+  const originalText = btn.textContent;
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch('https://formspree.io/f/xzdqvnlk', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(form)
+    });
+
+    if (res.ok) {
+      form.style.display = 'none';
+      const msg = document.getElementById(successId);
+      if (msg) {
+        msg.style.display = 'block';
+        window.scrollTo({ top: msg.offsetTop - 100, behavior: 'smooth' });
+      }
+    } else {
+      btn.textContent = 'Something went wrong — try again';
+      btn.disabled = false;
+    }
+  } catch {
+    btn.textContent = 'Network error — try again';
+    btn.disabled = false;
+  }
+}
+
 /* ── QUOTE FORM ── */
 const quoteForm = document.getElementById('quote-form');
 if (quoteForm) {
   quoteForm.addEventListener('submit', e => {
     e.preventDefault();
-    quoteForm.style.display = 'none';
-    const msg = document.getElementById('success-msg');
-    if (msg) msg.style.display = 'block';
-    window.scrollTo({ top: msg ? msg.offsetTop - 100 : 0, behavior: 'smooth' });
+    submitToFormspree(quoteForm, 'success-msg');
   });
 }
 
@@ -86,9 +114,6 @@ const designerForm = document.getElementById('designer-form');
 if (designerForm) {
   designerForm.addEventListener('submit', e => {
     e.preventDefault();
-    designerForm.style.display = 'none';
-    const msg = document.getElementById('designer-success');
-    if (msg) msg.style.display = 'block';
-    window.scrollTo({ top: msg ? msg.offsetTop - 100 : 0, behavior: 'smooth' });
+    submitToFormspree(designerForm, 'designer-success');
   });
 }
