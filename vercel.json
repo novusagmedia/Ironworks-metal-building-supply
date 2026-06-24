@@ -1,5 +1,9 @@
 {
   "outputDirectory": ".",
   "buildCommand": "",
-  "installCommand": ""
+  "installCommand": "",
+  "rewrites": [
+    { "source": "/hail-damage", "destination": "https://ironworks-landing-windows-doors.vercel.app" },
+    { "source": "/hail-damage/:path*", "destination": "https://ironworks-landing-windows-doors.vercel.app/:path*" }
+  ]
 }
