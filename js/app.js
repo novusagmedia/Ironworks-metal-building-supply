@@ -70,14 +70,14 @@ if (counterEls.length) {
 }
 
 /* ── FORMSPREE SUBMIT HELPER ── */
-async function submitToFormspree(form, successId) {
+async function submitToFormspree(form, successId, endpoint = 'https://formspree.io/f/xzdqvnlk') {
   const btn = form.querySelector('[type="submit"]');
   const originalText = btn.textContent;
   btn.textContent = 'Sending…';
   btn.disabled = true;
 
   try {
-    const res = await fetch('https://formspree.io/f/xzdqvnlk', {
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Accept': 'application/json' },
       body: new FormData(form)
@@ -115,5 +115,14 @@ if (designerForm) {
   designerForm.addEventListener('submit', e => {
     e.preventDefault();
     submitToFormspree(designerForm, 'designer-success');
+  });
+}
+
+/* ── HAIL DAMAGE INSPECTION FORM ── */
+const hailForm = document.getElementById('hail-form');
+if (hailForm) {
+  hailForm.addEventListener('submit', e => {
+    e.preventDefault();
+    submitToFormspree(hailForm, 'hail-success', 'https://formspree.io/f/xojojqrr');
   });
 }
