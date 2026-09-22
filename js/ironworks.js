@@ -2,7 +2,7 @@
 
 /* nav solidify on scroll */
 const nav = document.getElementById('nav');
-if (nav) {
+if (nav && !nav.hasAttribute('data-solid')) { /* data-solid: page keeps the dark bar at all times */
   const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 40);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });

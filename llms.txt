@@ -13,7 +13,6 @@
 - [Contractor Job Specification Review](https://www.ironworksbuildingsupply.com/contractors.html): For regional contractors and roofers — send an active or upcoming job (profile, gauge, color, lengths, trim) for a specification review and reorder-ready pricing.
 - [Building Project Fit Check](https://www.ironworksbuildingsupply.com/get-a-quote.html): For building buyers — share intended use, site status, dimensions, timeline, and decision/financial path; a local builder reviews it for your project location and follows up with a next step.
 - [3D Building Designer](https://www.ironworksbuildingsupply.com/3d-designer.html): Supporting tool to configure size, doors, colors, and layout, then send the design to Ironworks for review.
-- [Free Hail Damage Inspection](https://www.ironworksbuildingsupply.com/hail-damage-inspection.html): Seasonal, event-driven service for Nebraska Panhandle homeowners with hail damage to windows, exterior doors, or garage doors; includes insurance documentation support.
 
 ## How the process works
 1. Design It — use the 3D tool to lay out building size, doors, colors, and layout in minutes.

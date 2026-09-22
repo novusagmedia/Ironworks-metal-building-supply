@@ -1,0 +1,10 @@
+# Internal files: kept in git, never deployed
+.claude
+CLAUDE.md
+Structure
+Link_for_3d_designer
+frames
+serve.mjs
+screenshot.mjs
+Brand_assets/*.png
+Hail_pictures/*.jpg
