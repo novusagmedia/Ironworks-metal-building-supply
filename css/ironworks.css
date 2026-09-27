@@ -532,3 +532,4 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
   .hamburger{display:flex}
 }
 @media(max-width:640px){.nav-cta{display:none}}
+.a-fig img,.a-gi img{height:auto}

@@ -2,6 +2,11 @@
 // The renderer owns the markup, so every article gets identical structure.
 import { F, OFFER } from './facts.mjs';
 import { esc, pageUrl, breadcrumbSchema } from './layout.mjs';
+import fs from 'node:fs';
+
+// Real dimensions from build/images.json (written by build/images.mjs) → width/height attrs, no layout shift.
+const IMG = JSON.parse(fs.readFileSync(new URL('./images.json', import.meta.url), 'utf8'));
+const dims = (src) => (IMG[src] ? ` width="${IMG[src].w}" height="${IMG[src].h}"` : '');
 
 // Inline text allows **bold** and [label](href). Everything else is escaped.
 const inline = (s) => esc(s)
@@ -26,8 +31,8 @@ function renderBlock([type, data], index) {
     case 'icons': return `<ul class="a-icons">${data.map(([term, def]) => `<li><strong>${inline(term)}</strong> — ${inline(def)}</li>`).join('')}</ul>`;
     case 'note': return `<p class="a-note">${inline(data)}</p>`;
     // Real Ironworks photos only (Brand Foundation §18). [src, alt, caption]
-    case 'figure': return `<figure class="a-fig"><img src="${data[0]}" alt="${esc(data[1])}" loading="lazy"/>${data[2] ? `<figcaption>${inline(data[2])}</figcaption>` : ''}</figure>`;
-    case 'gallery': return `<div class="a-gallery">${data.map(([src, alt, label]) => `<figure class="a-gi"><img src="${src}" alt="${esc(alt)}" loading="lazy"/><figcaption>${esc(label)}</figcaption></figure>`).join('')}</div>`;
+    case 'figure': return `<figure class="a-fig"><img src="${data[0]}"${dims(data[0])} alt="${esc(data[1])}" loading="lazy"/>${data[2] ? `<figcaption>${inline(data[2])}</figcaption>` : ''}</figure>`;
+    case 'gallery': return `<div class="a-gallery">${data.map(([src, alt, label]) => `<figure class="a-gi"><img src="${src}"${dims(src)} alt="${esc(alt)}" loading="lazy"/><figcaption>${esc(label)}</figcaption></figure>`).join('')}</div>`;
     default: throw new Error(`Unknown block type "${type}". Allowed: h2, p, list, callout, icons, note, figure, gallery.`);
   }
 }
