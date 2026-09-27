@@ -533,3 +533,6 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 }
 @media(max-width:640px){.nav-cta{display:none}}
 .a-fig img,.a-gi img{height:auto}
+
+/* 4-up values grid on desktop only; phones and tablets fall back to the responsive .values rules */
+@media(min-width:1001px){.values.four{grid-template-columns:repeat(4,1fr)}}
