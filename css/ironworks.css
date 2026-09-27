@@ -451,7 +451,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .a-crumbs a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 .a-crumbs a:active{opacity:.7}
 .a-main{background:var(--paper);padding:clamp(48px,8vh,96px) 0 clamp(64px,10vh,120px)}
-.a-body{max-width:760px;margin:0 auto;padding:0 var(--edge);font-size:clamp(16px,1.2vw,18px);color:var(--text-dark)}
+.a-body{max-width:calc(760px + 2 * var(--edge));margin:0 auto;padding:0 var(--edge);font-size:clamp(16px,1.2vw,18px);color:var(--text-dark)}
 .a-body > p{margin-top:18px;color:#2A3B46}
 .a-h2{font-family:var(--fd);font-weight:800;letter-spacing:-.02em;line-height:1.15;font-size:clamp(24px,2.6vw,32px);color:var(--steel);margin-top:clamp(40px,6vh,64px)}
 .a-body > .a-h2:first-child{margin-top:0}
@@ -492,3 +492,8 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .a-rel:active{transform:translateY(0)}
 .a-hero .shell{max-width:calc(760px + 2 * var(--edge))}
 .a-hero h1{font-size:clamp(34px,5vw,60px)}
+
+.a-body a:not(.btn){color:var(--iron);text-decoration:underline;text-decoration-color:var(--gold-line);text-decoration-thickness:1.5px;text-underline-offset:3px}
+.a-body a:not(.btn):hover{color:var(--steel);text-decoration-color:var(--gold)}
+.a-body a:not(.btn):focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.a-body a:not(.btn):active{opacity:.7}

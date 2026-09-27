@@ -9,7 +9,8 @@ const NAV = [
   { label: 'What We Build', href: 'index.html#what-we-build' },
   { label: '3D Designer', href: 'index.html#designer' },
   { label: 'Gallery', href: 'index.html#gallery' },
-  { label: 'About', href: 'index.html#about' },
+  { label: 'About', href: 'about.html' },
+  { label: 'Contact', href: 'contact.html' },
 ];
 
 const ld = (obj) => `  <script type="application/ld+json">\n  ${JSON.stringify(obj)}\n  </script>`;
@@ -67,7 +68,7 @@ export function head(p) {
   gtag('js', new Date());
   gtag('config', '${F.ga4}');
 </script>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>${p.file === '404.html' ? '\n  <base href="/"/>' : ''}
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${esc(p.title)}</title>
   <meta name="description" content="${esc(p.desc)}"/>
@@ -161,7 +162,8 @@ export function footer(p) {
       <a href="${OFFER.contractor.href}">For Contractors</a>
       <a href="${OFFER.building.href}">${OFFER.building.short}</a>
       <a href="3d-designer.html">3D Designer</a>
-      <a href="index.html#about">About</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
       <a href="${F.links.review}" target="_blank" rel="noopener">Leave a Google Review</a>
     </div>
   </div>

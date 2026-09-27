@@ -40,8 +40,10 @@ const pages = [
 ];
 
 // ---------- articles (block-declared) ----------
-for (const f of fs.readdirSync(path.join(HERE, 'articles')).filter((f) => f.endsWith('.mjs')).sort()) {
-  pages.push((await import(path.join(HERE, 'articles', f))).default);
+for (const dir of ['site', 'articles']) {
+  for (const f of fs.readdirSync(path.join(HERE, dir)).filter((f) => f.endsWith('.mjs') && !f.startsWith('_')).sort()) {
+    pages.push(...[(await import(path.join(HERE, dir, f))).default].flat());
+  }
 }
 
 // Pages the build does not generate but that exist on the site.

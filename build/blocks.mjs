@@ -44,6 +44,7 @@ export function faqSchemaFromHtml(html) {
 }
 
 const CTA = {
+  both: { lead: 'Ready when you are.', text: `Contractors: send a job for review. Building buyers: start a ${OFFER.building.name}. Or call and talk it through.`, offers: [OFFER.contractor, OFFER.building] },
   contractor: { lead: 'Have a panel or trim job coming up?', text: `Send the details for a ${OFFER.contractor.name}. We review the actual job rather than give a generic number.`, offer: OFFER.contractor },
   building: { lead: 'Planning a building?', text: `Start a ${OFFER.building.name}. Spencer's team reviews your use, site, size, and timeline, then follows up with the next step.`, offer: OFFER.building },
 };
@@ -55,11 +56,29 @@ export const R = {
   DESIGNER: ['3d-designer.html', '3D Building Designer', 'Lay out size, doors, and colors in minutes.'],
 };
 
-export function article({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta = 'contractor', ogImage }) {
+export const article = (opts) => render({ cta: 'contractor', ...opts }, 'article');
+// Non-article pages (contact, about, thank-you, legal): same renderer, website type, optional CTA.
+export const page = (opts) => render(opts, 'page');
+
+function ctaHtml(key) {
+  if (!key) return '';
+  const c = CTA[key];
+  const offers = c.offers || [c.offer];
+  const buttons = offers.map((o, i) => `<a href="${o.href}" class="btn ${i ? 'btn-line' : 'btn-gold'}">Start a ${esc(o.short)}${i ? '' : ' <span class="arw">→</span>'}</a>`).join('\n        ');
+  return `<aside class="a-cta">
+      <h2>${esc(c.lead)}</h2>
+      <p>${esc(c.text)}</p>
+      <div class="a-cta-row">
+        ${buttons}
+        <a href="tel:${F.phone.tel}" class="btn btn-line">${F.phone.display}</a>
+      </div>
+    </aside>`;
+}
+
+function render({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta, ogImage, noindex }, kind) {
   const file = `${slug}.html`;
-  const page = { file, title, desc, ogImage, ogType: 'article', navScrolled: true };
+  const page = { file, title, desc, ogImage, noindex, ogType: kind === 'article' ? 'article' : 'website', navScrolled: true };
   const faqBlock = faqHtml(faqs);
-  const c = CTA[cta];
 
   const body = `
 <header class="page-hero a-hero">
@@ -76,14 +95,7 @@ export function article({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, f
   <article class="a-body">
 ${blocks.map((b, i) => '    ' + renderBlock(b, i)).join('\n')}
     ${faqBlock}
-    <aside class="a-cta">
-      <h2>${esc(c.lead)}</h2>
-      <p>${esc(c.text)}</p>
-      <div class="a-cta-row">
-        <a href="${c.offer.href}" class="btn btn-gold">Start a ${esc(c.offer.short)} <span class="arw">→</span></a>
-        <a href="tel:${F.phone.tel}" class="btn btn-line">${F.phone.display}</a>
-      </div>
-    </aside>
+    ${ctaHtml(cta)}
   </article>
 ${related.length ? `  <section class="a-related" aria-label="Related">
     <h2 class="a-h2">Related</h2>
@@ -97,5 +109,5 @@ ${related.map(([href, t, blurb]) => `      <a href="${href}" class="a-rel"><stro
   const schema = [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name: crumb, url: pageUrl(page) }])];
   const faqSchema = faqSchemaFromHtml(faqBlock);
   if (faqSchema) schema.push(faqSchema);
-  return { ...page, crumb, body, schema, kind: 'article' };
+  return { ...page, crumb, body, schema, kind };
 }
