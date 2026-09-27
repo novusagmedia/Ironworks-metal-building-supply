@@ -1,0 +1,101 @@
+// Long-form content is declared as typed blocks, never hand-written HTML.
+// The renderer owns the markup, so every article gets identical structure.
+import { F, OFFER } from './facts.mjs';
+import { esc, pageUrl, breadcrumbSchema } from './layout.mjs';
+
+// Inline text allows **bold** and [label](href). Everything else is escaped.
+const inline = (s) => esc(s)
+  .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+  .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+
+const list = (items) => `<ul class="a-list">${items.map((i) => `<li>${inline(i)}</li>`).join('')}</ul>`;
+
+// Six block types. Adding a seventh is a design decision, not a content edit.
+function renderBlock([type, data], index) {
+  switch (type) {
+    case 'h2': return `<h2 class="a-h2">${inline(data)}</h2>`;
+    case 'p': return `<p>${inline(data)}</p>`;
+    case 'list': return list(data);
+    case 'callout': {
+      // First block → h2, otherwise h3, so the heading outline never skips a level.
+      const [title, body] = data;
+      const h = index === 0 ? 'h2' : 'h3';
+      const inner = Array.isArray(body) ? list(body) : `<p>${inline(body)}</p>`;
+      return `<aside class="a-callout"><${h}>${inline(title)}</${h}>${inner}</aside>`;
+    }
+    case 'icons': return `<ul class="a-icons">${data.map(([term, def]) => `<li><strong>${inline(term)}</strong> — ${inline(def)}</li>`).join('')}</ul>`;
+    case 'note': return `<p class="a-note">${inline(data)}</p>`;
+    default: throw new Error(`Unknown block type "${type}". Allowed: h2, p, list, callout, icons, note.`);
+  }
+}
+
+// FAQs render as real <details>; FAQPage schema is parsed back out of that markup.
+export function faqHtml(faqs) {
+  if (!faqs?.length) return '';
+  return `<section class="a-faq"><h2 class="a-h2">Questions</h2>${faqs.map(([q, a]) =>
+    `<details><summary>${inline(q)}</summary><div class="a-faq-a"><p>${inline(a)}</p></div></details>`).join('')}</section>`;
+}
+
+export function faqSchemaFromHtml(html) {
+  const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').trim();
+  const items = [...html.matchAll(/<details><summary>(.*?)<\/summary><div class="a-faq-a">(.*?)<\/div><\/details>/gs)]
+    .map(([, q, a]) => ({ '@type': 'Question', name: strip(q), acceptedAnswer: { '@type': 'Answer', text: strip(a) } }));
+  return items.length ? { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: items } : null;
+}
+
+const CTA = {
+  contractor: { lead: 'Have a panel or trim job coming up?', text: `Send the details for a ${OFFER.contractor.name}. We review the actual job rather than give a generic number.`, offer: OFFER.contractor },
+  building: { lead: 'Planning a building?', text: `Start a ${OFFER.building.name}. Spencer's team reviews your use, site, size, and timeline, then follows up with the next step.`, offer: OFFER.building },
+};
+
+// Related links are defined once as constants and passed by reference.
+export const R = {
+  CONTRACTORS: [OFFER.contractor.href, OFFER.contractor.name, 'Send an active or upcoming job for review.'],
+  FIT_CHECK: [OFFER.building.href, OFFER.building.name, 'Tell us about your building project.'],
+  DESIGNER: ['3d-designer.html', '3D Building Designer', 'Lay out size, doors, and colors in minutes.'],
+};
+
+export function article({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta = 'contractor', ogImage }) {
+  const file = `${slug}.html`;
+  const page = { file, title, desc, ogImage, ogType: 'article', navScrolled: true };
+  const faqBlock = faqHtml(faqs);
+  const c = CTA[cta];
+
+  const body = `
+<header class="page-hero a-hero">
+  <div class="hero-grid" aria-hidden="true"></div>
+  <div class="shell">
+    <nav class="a-crumbs" aria-label="Breadcrumb"><a href="index.html">Home</a><span aria-hidden="true">/</span><span>${esc(crumb)}</span></nav>
+    <span class="eyebrow on-dark">${esc(eyebrow)}</span>
+    <h1>${inline(h1)}</h1>
+    <p>${inline(lead)}</p>
+  </div>
+</header>
+
+<main class="a-main">
+  <article class="a-body">
+${blocks.map((b, i) => '    ' + renderBlock(b, i)).join('\n')}
+    ${faqBlock}
+    <aside class="a-cta">
+      <h2>${esc(c.lead)}</h2>
+      <p>${esc(c.text)}</p>
+      <div class="a-cta-row">
+        <a href="${c.offer.href}" class="btn btn-gold">Start a ${esc(c.offer.short)} <span class="arw">→</span></a>
+        <a href="tel:${F.phone.tel}" class="btn btn-line">${F.phone.display}</a>
+      </div>
+    </aside>
+  </article>
+${related.length ? `  <section class="a-related" aria-label="Related">
+    <h2 class="a-h2">Related</h2>
+    <div class="a-related-grid">
+${related.map(([href, t, blurb]) => `      <a href="${href}" class="a-rel"><strong>${esc(t)}</strong><span>${esc(blurb)}</span></a>`).join('\n')}
+    </div>
+  </section>` : ''}
+</main>
+`;
+
+  const schema = [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name: crumb, url: pageUrl(page) }])];
+  const faqSchema = faqSchemaFromHtml(faqBlock);
+  if (faqSchema) schema.push(faqSchema);
+  return { ...page, crumb, body, schema, kind: 'article' };
+}
