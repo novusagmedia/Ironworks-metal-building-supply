@@ -85,11 +85,19 @@ for (const p of pages) {
   outputs.set(p.file, head(p) + nav(p) + p.body + footer(p));
 }
 
+const drafts = new Set(pages.filter((p) => p.draft).map((p) => p.file));
+for (const p of pages) {
+  if (p.draft) continue;
+  for (const d of drafts) if (outputs.get(p.file).includes(`href="${d}"`)) problems.push(`${p.file}: links to draft ${d} (drafts stay unlinked until approved)`);
+}
+
+const allowFor = Object.fromEntries(pages.map((p) => [p.file, (p.allow || []).map((a) => a.toLowerCase())]));
 for (const [file, html] of outputs) {
   const text = visibleText(html);
   for (const re of BANNED) {
     const m = text.match(re);
-    if (m) problems.push(`${file}: never-write list hit "${m[0]}" …${text.slice(Math.max(0, m.index - 40), m.index + 40)}…`);
+    // Per-page exemptions are declared in the page itself (e.g. a comparison that must name 29 gauge).
+    if (m && !allowFor[file].includes(m[0].toLowerCase())) problems.push(`${file}: never-write list hit "${m[0]}" …${text.slice(Math.max(0, m.index - 40), m.index + 40)}…`);
   }
   for (const [, href] of html.matchAll(/href="([^"#:?]+\.html)(?:#[^"]*)?"/g)) {
     if (!outputs.has(href) && !STATIC.includes(href) && !fs.existsSync(path.join(ROOT, href))) problems.push(`${file}: broken link → ${href}`);
@@ -113,5 +121,5 @@ ${indexable.map((p) => `  <url>\n    <loc>${pageUrl(p)}</loc>\n  </url>`).join('
 </urlset>
 `);
 
-console.log(`✓ Built ${outputs.size} pages, sitemap has ${indexable.length} URLs.`);
+console.log(`✓ Built ${outputs.size} pages, sitemap has ${indexable.length} URLs${drafts.size ? `, ${drafts.size} draft(s) awaiting approval: ${[...drafts].join(', ')}` : ''}.`);
 if (warnings.length) console.log('  Notes:\n  ' + warnings.join('\n  '));
