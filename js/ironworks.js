@@ -16,6 +16,7 @@ if (hbg && mob) {
   hbg.addEventListener('click', () => {
     const open = mob.classList.toggle('open');
     hbg.classList.toggle('open', open);
+    hbg.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
   mob.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
@@ -23,6 +24,20 @@ if (hbg && mob) {
     if (mob.classList.contains('open') && !mob.contains(e.target) && !hbg.contains(e.target)) close();
   });
 }
+
+/* nav dropdowns: hover/focus via CSS; click/tap and Escape here */
+document.querySelectorAll('.sub-btn').forEach(btn => {
+  const li = btn.parentElement;
+  const set = (v) => { li.classList.toggle('open', v); btn.setAttribute('aria-expanded', v); };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const v = !li.classList.contains('open');
+    document.querySelectorAll('.has-sub.open').forEach(o => { if (o !== li) { o.classList.remove('open'); o.querySelector('.sub-btn').setAttribute('aria-expanded', false); } });
+    set(v);
+  });
+  li.addEventListener('keydown', (e) => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+});
+document.addEventListener('click', () => document.querySelectorAll('.has-sub.open').forEach(li => { li.classList.remove('open'); li.querySelector('.sub-btn').setAttribute('aria-expanded', false); }));
 
 /* scroll reveal */
 const revealObs = new IntersectionObserver((entries) => {

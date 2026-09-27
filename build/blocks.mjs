@@ -10,7 +10,7 @@ const inline = (s) => esc(s)
 
 const list = (items) => `<ul class="a-list">${items.map((i) => `<li>${inline(i)}</li>`).join('')}</ul>`;
 
-// Six block types. Adding a seventh is a design decision, not a content edit.
+// Block types are fixed. Adding one is a design decision, not a content edit.
 function renderBlock([type, data], index) {
   switch (type) {
     case 'h2': return `<h2 class="a-h2">${inline(data)}</h2>`;
@@ -25,7 +25,10 @@ function renderBlock([type, data], index) {
     }
     case 'icons': return `<ul class="a-icons">${data.map(([term, def]) => `<li><strong>${inline(term)}</strong> — ${inline(def)}</li>`).join('')}</ul>`;
     case 'note': return `<p class="a-note">${inline(data)}</p>`;
-    default: throw new Error(`Unknown block type "${type}". Allowed: h2, p, list, callout, icons, note.`);
+    // Real Ironworks photos only (Brand Foundation §18). [src, alt, caption]
+    case 'figure': return `<figure class="a-fig"><img src="${data[0]}" alt="${esc(data[1])}" loading="lazy"/>${data[2] ? `<figcaption>${inline(data[2])}</figcaption>` : ''}</figure>`;
+    case 'gallery': return `<div class="a-gallery">${data.map(([src, alt, label]) => `<figure class="a-gi"><img src="${src}" alt="${esc(alt)}" loading="lazy"/><figcaption>${esc(label)}</figcaption></figure>`).join('')}</div>`;
+    default: throw new Error(`Unknown block type "${type}". Allowed: h2, p, list, callout, icons, note, figure, gallery.`);
   }
 }
 
@@ -54,6 +57,15 @@ export const R = {
   CONTRACTORS: [OFFER.contractor.href, OFFER.contractor.name, 'Send an active or upcoming job for review.'],
   FIT_CHECK: [OFFER.building.href, OFFER.building.name, 'Tell us about your building project.'],
   DESIGNER: ['3d-designer.html', '3D Building Designer', 'Lay out size, doors, and colors in minutes.'],
+  PANELS: ['metal-roofing-panels.html', 'Metal Roofing & Siding Panels', 'PBR, AG, and R-panel. PBR in 26 gauge.'],
+  TRIM: ['custom-metal-trim.html', 'Custom Metal Trim', 'Trim rolled on our own sheet-metal roller.'],
+  DOORS: ['garage-doors-windows.html', 'Garage Doors & Windows', 'Midland Garage Doors and Gerkin Windows.'],
+  POST_FRAME: ['post-frame-buildings.html', 'Post-Frame Buildings', 'Ag barns, shops, garages, and storage.'],
+  COLD_FORM: ['cold-form-steel-kits.html', 'Cold-Form Steel Kits', 'Steel framing kits for commercial and residential builds.'],
+  RED_IRON: ['red-iron-buildings.html', 'Red Iron Buildings', 'Structural steel for larger commercial builds.'],
+  PROJECTS: ['projects.html', 'Projects', 'Real buildings across the region.'],
+  FAQ: ['faq.html', 'Questions & Answers', 'Hours, delivery, colors, pricing, and more.'],
+  PANEL_ORDER: ['what-you-need-to-order-metal-panels.html', 'What You Need to Order Metal Panels', 'The nine details to send.'],
 };
 
 export const article = (opts) => render({ cta: 'contractor', ...opts }, 'article');

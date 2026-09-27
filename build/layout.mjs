@@ -4,11 +4,22 @@ import { F, OFFER } from './facts.mjs';
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 export const pageUrl = (p) => (p.file === 'index.html' ? `${F.domain}/` : `${F.domain}/${p.file}`);
 
+// Approved Phase 2 nav (Structure/phase-2-architecture.md). Groups open on hover, focus, or tap.
 const NAV = [
-  { label: 'For Contractors', href: OFFER.contractor.href },
-  { label: 'What We Build', href: 'index.html#what-we-build' },
-  { label: '3D Designer', href: 'index.html#designer' },
-  { label: 'Gallery', href: 'index.html#gallery' },
+  { label: 'Buildings', items: [
+    { label: 'Post-Frame Buildings', href: 'post-frame-buildings.html' },
+    { label: 'Cold-Form Steel Kits', href: 'cold-form-steel-kits.html' },
+    { label: 'Red Iron Buildings', href: 'red-iron-buildings.html' },
+    { label: 'Design in 3D', href: '3d-designer.html' },
+  ] },
+  { label: 'Panels & Trim', items: [
+    { label: 'Metal Roofing & Siding Panels', href: 'metal-roofing-panels.html' },
+    { label: 'Custom Metal Trim', href: 'custom-metal-trim.html' },
+    { label: 'What to Send for a Panel Order', href: 'what-you-need-to-order-metal-panels.html' },
+  ] },
+  { label: 'Doors & Windows', href: 'garage-doors-windows.html' },
+  { label: 'Contractors', href: OFFER.contractor.href },
+  { label: 'Projects', href: 'projects.html' },
   { label: 'About', href: 'about.html' },
   { label: 'Contact', href: 'contact.html' },
 ];
@@ -102,8 +113,18 @@ ${schemas}
 export function nav(p) {
   const attrs = p.solidNav ? ' data-solid style="position:relative"' : '';
   const cls = p.navScrolled || p.solidNav ? 'nav scrolled' : 'nav';
-  const items = NAV.map((n) => `    <li><a href="${n.href}"${n.href === p.file ? ' class="on"' : ''}>${n.label}</a></li>`).join('\n');
-  const mob = NAV.map((n) => `  <a href="${n.href}">${n.label}</a>`).join('\n');
+  const on = (href) => (href === p.file ? ' class="on" aria-current="page"' : '');
+  const items = NAV.map((n, i) => n.items
+    ? `    <li class="has-sub${n.items.some((c) => c.href === p.file) ? ' on' : ''}">
+      <button class="sub-btn" aria-expanded="false" aria-controls="sub-${i}">${n.label}<span class="caret" aria-hidden="true"></span></button>
+      <ul class="sub" id="sub-${i}">
+${n.items.map((c) => `        <li><a href="${c.href}"${on(c.href)}>${c.label}</a></li>`).join('\n')}
+      </ul>
+    </li>`
+    : `    <li><a href="${n.href}"${on(n.href)}>${n.label}</a></li>`).join('\n');
+  const mob = NAV.map((n) => n.items
+    ? `  <p class="mob-group">${n.label}</p>\n${n.items.map((c) => `  <a href="${c.href}" class="mob-sub">${c.label}</a>`).join('\n')}`
+    : `  <a href="${n.href}">${n.label}</a>`).join('\n');
   return `
 <!-- ── NAV ── -->
 <nav class="${cls}" id="nav"${attrs}>
@@ -113,11 +134,15 @@ export function nav(p) {
   <ul class="nav-links">
 ${items}
   </ul>
-  <a href="${OFFER.building.href}" class="nav-cta">${OFFER.building.short}</a>
-  <button class="hamburger" id="hbg" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+  <div class="nav-right">
+    <a href="tel:${F.phone.tel}" class="nav-phone">${F.phone.display}</a>
+    <a href="${OFFER.building.href}" class="nav-cta">${OFFER.building.short}</a>
+    <button class="hamburger" id="hbg" aria-label="Open menu" aria-controls="mob" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 <div class="mob" id="mob">
 ${mob}
+  <a href="tel:${F.phone.tel}">Call ${F.phone.display}</a>
   <a href="${OFFER.building.href}" class="mob-cta">Start Your ${OFFER.building.short}</a>
 </div>
 `;
@@ -149,12 +174,13 @@ export function footer(p) {
     </div>
     <div class="foot-col">
       <h5>Products</h5>
-      <a href="index.html#what-we-build">PBR / R-Panel Roofing</a>
-      <a href="index.html#what-we-build">AG Panels</a>
-      <a href="index.html#what-we-build">Post-Frame Packages</a>
-      <a href="index.html#what-we-build">Cold-Form Steel Kits</a>
-      <a href="index.html#what-we-build">Red Iron Packages</a>
-      <a href="index.html#what-we-build">Custom Trim &amp; Hardware</a>
+      <a href="metal-roofing-panels.html">PBR / R-Panel Roofing</a>
+      <a href="metal-roofing-panels.html">AG Panels</a>
+      <a href="custom-metal-trim.html">Custom Trim &amp; Hardware</a>
+      <a href="post-frame-buildings.html">Post-Frame Buildings</a>
+      <a href="cold-form-steel-kits.html">Cold-Form Steel Kits</a>
+      <a href="red-iron-buildings.html">Red Iron Buildings</a>
+      <a href="garage-doors-windows.html">Garage Doors &amp; Windows</a>
     </div>
     <div class="foot-col">
       <h5>Quick Links</h5>
@@ -162,6 +188,9 @@ export function footer(p) {
       <a href="${OFFER.contractor.href}">For Contractors</a>
       <a href="${OFFER.building.href}">${OFFER.building.short}</a>
       <a href="3d-designer.html">3D Designer</a>
+      <a href="projects.html">Projects</a>
+      <a href="faq.html">Questions &amp; Answers</a>
+      <a href="scottsbluff-gering-morrill.html">Scottsbluff, Gering &amp; Morrill</a>
       <a href="about.html">About</a>
       <a href="contact.html">Contact</a>
       <a href="${F.links.review}" target="_blank" rel="noopener">Leave a Google Review</a>
