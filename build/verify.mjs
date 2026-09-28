@@ -14,6 +14,9 @@ const html = Object.fromEntries(pages.map((f) => [f, read(f)]));
 const visible = (h) => h.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, ' ').replace(/<[^>]+>/g, ' ').replace(/&amp;/g, '&').replace(/\s+/g, ' ');
 const meta = (h, re) => (h.match(re) || [])[1];
 const isNoindex = (h) => /<meta name="robots" content="noindex/.test(h);
+// Clean URL → file: '/' → index.html, '/contact' → contact.html, 'x.html' → x.html
+const fileFor = (u) => { const p = u.replace(/^https:\/\/www\.ironworksbuildingsupply\.com/, '').replace(/^\//, ''); return p === '' ? 'index.html' : /\.[a-z]+$/.test(p) ? p : p + '.html'; };
+const cleanOf = (f) => (f === 'index.html' ? '/' : '/' + f.replace(/\.html$/, ''));
 
 const results = [];
 const check = (name, fails) => results.push({ name, fails: fails.filter(Boolean) });
@@ -24,7 +27,9 @@ const check = (name, fails) => results.push({ name, fails: fails.filter(Boolean)
   for (const [p, h] of Object.entries(html)) {
     for (const [, href] of h.matchAll(/href="([^"]+)"/g)) {
       if (/^(https?:|mailto:|tel:|\/_vercel)/.test(href)) continue;
-      const [file, anchor] = href.split('#');
+      const [raw, anchor] = href.split('#');
+      if (/\.html$/.test(raw)) f.push(`${p} → ${href} (uses .html; links must be clean)`);
+      const file = raw ? fileFor(raw) : '';
       const target = file || p;
       if (file && !exists(file)) { f.push(`${p} → ${href} (no file)`); continue; }
       if (anchor && target.endsWith('.html') && !new RegExp(`id="${anchor}"`).test(html[target] || '')) f.push(`${p} → ${href} (no #${anchor})`);
@@ -68,7 +73,7 @@ check('Titles ≤ 70 chars, descriptions 50–158 chars, one H1 per page', Objec
 // 5. Canonical points at the page itself
 check('Canonical URL matches the file', Object.entries(html).map(([p, h]) => {
   const c = meta(h, /<link rel="canonical" href="([^"]+)"/);
-  const want = p === 'index.html' ? `${F.domain}/` : `${F.domain}/${p}`;
+  const want = `${F.domain}${cleanOf(p)}`;
   return p !== '404.html' && c !== want && `${p}: ${c}`;
 }));
 
@@ -88,11 +93,11 @@ check('JSON-LD valid; no aggregateRating; FAQ schema matches visible questions',
 {
   const sm = read('sitemap.xml');
   const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  const fileOf = (u) => (u === `${F.domain}/` ? 'index.html' : u.replace(`${F.domain}/`, ''));
+  const fileOf = fileFor;
   const indexable = pages.filter((p) => !isNoindex(html[p]) && p !== '404.html');
   check('Sitemap valid and complete (no noindex pages, no missing pages)', [
     !sm.includes('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"') && 'wrong or missing sitemap namespace',
-    ...locs.map((u) => !exists(fileOf(u)) ? `listed but missing: ${u}` : isNoindex(html[fileOf(u)]) && `listed but noindex: ${u}`),
+    ...locs.map((u) => /\.html$/.test(u) ? `sitemap URL uses .html: ${u}` : !exists(fileOf(u)) ? `listed but missing: ${u}` : isNoindex(html[fileOf(u)]) && `listed but noindex: ${u}`),
     ...indexable.map((p) => !locs.map(fileOf).includes(p) && `indexable but not in sitemap: ${p}`),
   ]);
 }
@@ -100,8 +105,9 @@ check('JSON-LD valid; no aggregateRating; FAQ schema matches visible questions',
 // 8. Redirects point somewhere real
 {
   const v = JSON.parse(read('vercel.json'));
-  check('Every redirect destination exists', (v.redirects || []).map((r) =>
-    !/^https?:/.test(r.destination) && r.destination !== '/' && !exists(r.destination.replace(/^\//, '')) && `${r.source} → ${r.destination}`));
+  check('cleanUrls on; every redirect destination exists', [
+    v.cleanUrls !== true && 'vercel.json cleanUrls is not true',
+    ...(v.redirects || []).map((r) => !/^https?:/.test(r.destination) && !exists(fileFor(r.destination)) && `${r.source} → ${r.destination}`)]);
 }
 
 // 9. Facts: only the approved phone, email, and address appear; retired values never do
@@ -123,7 +129,7 @@ check('JSON-LD valid; no aggregateRating; FAQ schema matches visible questions',
 {
   const drafts = pages.filter((p) => isNoindex(html[p]) && /\| Ironworks<\/title>/.test(html[p]) && /og:type" content="article"/.test(html[p]));
   check('Draft articles are noindex and unlinked from live pages', pages.filter((p) => !isNoindex(html[p])).flatMap((p) =>
-    drafts.filter((d) => html[p].includes(`href="${d}"`)).map((d) => `${p} links to draft ${d}`)));
+    drafts.filter((d) => html[p].includes(`href="${cleanOf(d)}"`) || html[p].includes(`href="${d}"`)).map((d) => `${p} links to draft ${d}`)));
 }
 
 // 11. Forms post to Formspree and land on a thank-you page that exists
@@ -133,7 +139,7 @@ check('JSON-LD valid; no aggregateRating; FAQ schema matches visible questions',
   for (const [, id, , thanks] of js.matchAll(/bindForm\('([^']+)', '[^']+', '([^']+)'(?:, '([^']+)')?\)/g)) {
     const page = pages.find((p) => html[p].includes(`id="${id}"`));
     if (!page) f.push(`form #${id} not on any page`);
-    if (thanks && !exists(thanks)) f.push(`#${id} → ${thanks} missing`);
+    if (thanks && !exists(fileFor(thanks))) f.push(`#${id} → ${thanks} missing`);
   }
   check('Every form is on a page and its thank-you page exists', f);
 }
@@ -147,8 +153,8 @@ check('JSON-LD valid; no aggregateRating; FAQ schema matches visible questions',
 
 // 13. llms.txt only links to pages that exist and are live
 check('llms.txt links resolve to live pages', [...read('llms.txt').matchAll(/\((https:\/\/www\.ironworksbuildingsupply\.com\/[^)]*)\)/g)].map(([, u]) => {
-  const f = u === `${F.domain}/` ? 'index.html' : u.replace(`${F.domain}/`, '');
-  return (!exists(f) || isNoindex(html[f])) && u;
+  const f = fileFor(u);
+  return (/\.html$/.test(u) || !exists(f) || isNoindex(html[f])) && u;
 }));
 
 // 13b. IndexNow key file is present and matches the key in build/indexnow.mjs
@@ -167,7 +173,7 @@ check('llms.txt links resolve to live pages', [...read('llms.txt').matchAll(/\((
     for (const [w, label] of [[1440, 'desktop'], [768, 'tablet'], [390, 'phone']]) {
       await pg.setViewport({ width: w, height: 900 });
       for (const p of pages) {
-        await pg.goto(`http://localhost:3000/${p}`, { waitUntil: 'domcontentloaded' });
+        await pg.goto(`http://localhost:3000${cleanOf(p)}`, { waitUntil: 'domcontentloaded' });
         const r = await pg.evaluate(() => {
           const out = [];
           if (document.documentElement.scrollWidth > innerWidth + 1) out.push(`horizontal scroll ${document.documentElement.scrollWidth}px`);

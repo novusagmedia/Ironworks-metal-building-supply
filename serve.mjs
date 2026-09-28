@@ -30,6 +30,8 @@ const server = http.createServer((req, res) => {
   let urlPath = decodeURIComponent(req.url.split("?")[0]);
   if (urlPath === "/") urlPath = "/index.html";
 
+  // Mirror Vercel cleanUrls: /contact serves contact.html
+  if (!path.extname(urlPath) && fs.existsSync(path.join(__dirname, urlPath + ".html"))) urlPath += ".html";
   const filePath = path.join(__dirname, urlPath);
 
   fs.readFile(filePath, (err, data) => {

@@ -4,13 +4,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { F } from './facts.mjs';
-import { head, nav, footer, businessSchema, breadcrumbSchema, pageUrl } from './layout.mjs';
+import { head, nav, footer, businessSchema, breadcrumbSchema, pageUrl, cleanPath, cleanLinks } from './layout.mjs';
 import { INDEXNOW_KEY } from './indexnow.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HERE = path.join(ROOT, 'build');
 const body = (name) => fs.readFileSync(path.join(HERE, 'pages', `${name}.body.html`), 'utf8');
-const crumbs = (name, file) => [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name, url: `${F.domain}/${file}` }])];
+const crumbs = (name, file) => [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name, url: `${F.domain}${cleanPath(file)}` }])];
 
 // ---------- pages whose body is hand-built markup ----------
 const pages = [
@@ -83,13 +83,13 @@ const outputs = new Map();
 for (const p of pages) {
   p.desc = trimDesc(p.desc, p.file);
   if (p.title.length > 70) warnings.push(`${p.file}: title is ${p.title.length} chars (Google shows ~60)`);
-  outputs.set(p.file, head(p) + nav(p) + p.body + footer(p));
+  outputs.set(p.file, cleanLinks(head(p) + nav(p) + p.body + footer(p)));
 }
 
 const drafts = new Set(pages.filter((p) => p.draft).map((p) => p.file));
 for (const p of pages) {
   if (p.draft) continue;
-  for (const d of drafts) if (outputs.get(p.file).includes(`href="${d}"`)) problems.push(`${p.file}: links to draft ${d} (drafts stay unlinked until approved)`);
+  for (const d of drafts) if (outputs.get(p.file).includes(`href="${cleanPath(d)}"`)) problems.push(`${p.file}: links to draft ${d} (drafts stay unlinked until approved)`);
 }
 
 const allowFor = Object.fromEntries(pages.map((p) => [p.file, (p.allow || []).map((a) => a.toLowerCase())]));
@@ -100,8 +100,10 @@ for (const [file, html] of outputs) {
     // Per-page exemptions are declared in the page itself (e.g. a comparison that must name 29 gauge).
     if (m && !allowFor[file].includes(m[0].toLowerCase())) problems.push(`${file}: never-write list hit "${m[0]}" …${text.slice(Math.max(0, m.index - 40), m.index + 40)}…`);
   }
-  for (const [, href] of html.matchAll(/href="([^"#:?]+\.html)(?:#[^"]*)?"/g)) {
-    if (!outputs.has(href) && !STATIC.includes(href) && !fs.existsSync(path.join(ROOT, href))) problems.push(`${file}: broken link → ${href}`);
+  for (const [, href] of html.matchAll(/href="(\/[^"#?]*)(?:#[^"]*)?"/g)) {
+    if (href.startsWith('/_vercel')) continue;
+    const f = href === '/' ? 'index.html' : href.slice(1) + (href.includes('.') ? '' : '.html');
+    if (!outputs.has(f) && !STATIC.includes(f) && !fs.existsSync(path.join(ROOT, f))) problems.push(`${file}: broken link → ${href}`);
   }
   for (const [, src] of html.matchAll(/(?:src|href)="((?:Real_pictures|Brand_assets|Hail_pictures|css|js)\/[^"]+)"/g)) {
     if (!fs.existsSync(path.join(ROOT, src))) problems.push(`${file}: missing file → ${src}`);
@@ -155,15 +157,17 @@ ${live.map((p) => `- [${p.title.replace(/ \| .*$/, '')}](${pageUrl(p)}): ${p.des
 fs.writeFileSync(path.join(ROOT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 
 // ---------- vercel.json redirects: fixed legacy map + a clean URL for every live page ----------
+// cleanUrls (below) already 308s every /page.html → /page, so only true legacy moves are listed here.
 const LEGACY = [
-  { source: '/hail-damage.html', destination: '/hail-damage-inspection.html', permanent: true },
+  { source: '/hail-damage.html', destination: '/hail-damage-inspection', permanent: true },
   { source: '/Previous_sites_inspo/:path*', destination: '/', permanent: true },
   { source: '/ironworks.html', destination: '/', permanent: true },
+  { source: '/ironworks', destination: '/', permanent: true },
   { source: '/index', destination: '/', permanent: true },
 ];
 const vj = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
-vj.redirects = [...LEGACY, ...live.filter((p) => p.file !== 'index.html')
-  .map((p) => ({ source: `/${p.file.replace(/\.html$/, '')}`, destination: `/${p.file}`, permanent: true }))];
+vj.cleanUrls = true;
+vj.redirects = LEGACY;
 fs.writeFileSync(path.join(ROOT, 'vercel.json'), JSON.stringify(vj, null, 2) + '\n');
 
 console.log(`✓ Built ${outputs.size} pages, sitemap has ${indexable.length} URLs${drafts.size ? `, ${drafts.size} draft(s) awaiting approval: ${[...drafts].join(', ')}` : ''}.`);

@@ -77,13 +77,14 @@ if (counters.length) {
     const a = e.target.closest('a[href]');
     if (!a) return;
     const href = a.getAttribute('href');
+    const page = href.replace(/^\//, '').replace(/\.html(?=$|#)/, ''); // '/contractors' and 'contractors.html' both → 'contractors'
     const p = { funnel, link_location: where(a) };
     if (href.startsWith('tel:')) send('phone_click', p);
     else if (href.startsWith('mailto:')) send('email_click', p);
     else if (href.includes('google.com/maps')) send('directions_click', p);
     else if (href.includes('g.page/r/')) send('review_click', p);
-    else if (href.startsWith('3d-designer.html') || href.startsWith('index.html#designer')) send('designer_open', p);
-    else if (href.startsWith('contractors.html')) send('offer_click', { ...p, offer: 'contractor' });
-    else if (href.startsWith('get-a-quote.html')) send('offer_click', { ...p, offer: 'building' });
+    else if (page.startsWith('3d-designer') || page === '#designer' || page === 'index#designer') send('designer_open', p);
+    else if (page.startsWith('contractors')) send('offer_click', { ...p, offer: 'contractor' });
+    else if (page.startsWith('get-a-quote')) send('offer_click', { ...p, offer: 'building' });
   });
 })();

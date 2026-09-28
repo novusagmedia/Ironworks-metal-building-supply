@@ -2,7 +2,12 @@
 import { F, OFFER } from './facts.mjs';
 
 export const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-export const pageUrl = (p) => (p.file === 'index.html' ? `${F.domain}/` : `${F.domain}/${p.file}`);
+// Clean URLs: /contact, not /contact.html (vercel.json cleanUrls serves them and 308s the .html form).
+export const cleanPath = (file) => (file === 'index.html' ? '/' : `/${file.replace(/\.html$/, '')}`);
+export const pageUrl = (p) => `${F.domain}${cleanPath(p.file)}`;
+// Sources keep .html links (so link checks stay meaningful); output gets root-relative clean links.
+export const cleanLinks = (html) => html.replace(/href="(?![a-z]+:|\/|#)([\w.-]+)\.html(#[^"]*)?"/g,
+  (_, name, hash = '') => `href="${cleanPath(name + '.html')}${hash}"`);
 
 // Approved Phase 2 nav (Structure/phase-2-architecture.md). Groups open on hover, focus, or tap.
 const NAV = [

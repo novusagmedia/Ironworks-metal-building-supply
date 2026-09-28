@@ -5,7 +5,7 @@
   "redirects": [
     {
       "source": "/hail-damage.html",
-      "destination": "/hail-damage-inspection.html",
+      "destination": "/hail-damage-inspection",
       "permanent": true
     },
     {
@@ -19,88 +19,13 @@
       "permanent": true
     },
     {
-      "source": "/index",
+      "source": "/ironworks",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/contractors",
-      "destination": "/contractors.html",
-      "permanent": true
-    },
-    {
-      "source": "/get-a-quote",
-      "destination": "/get-a-quote.html",
-      "permanent": true
-    },
-    {
-      "source": "/3d-designer",
-      "destination": "/3d-designer.html",
-      "permanent": true
-    },
-    {
-      "source": "/about",
-      "destination": "/about.html",
-      "permanent": true
-    },
-    {
-      "source": "/cold-form-steel-kits",
-      "destination": "/cold-form-steel-kits.html",
-      "permanent": true
-    },
-    {
-      "source": "/contact",
-      "destination": "/contact.html",
-      "permanent": true
-    },
-    {
-      "source": "/custom-metal-trim",
-      "destination": "/custom-metal-trim.html",
-      "permanent": true
-    },
-    {
-      "source": "/faq",
-      "destination": "/faq.html",
-      "permanent": true
-    },
-    {
-      "source": "/garage-doors-windows",
-      "destination": "/garage-doors-windows.html",
-      "permanent": true
-    },
-    {
-      "source": "/metal-roofing-panels",
-      "destination": "/metal-roofing-panels.html",
-      "permanent": true
-    },
-    {
-      "source": "/post-frame-buildings",
-      "destination": "/post-frame-buildings.html",
-      "permanent": true
-    },
-    {
-      "source": "/privacy",
-      "destination": "/privacy.html",
-      "permanent": true
-    },
-    {
-      "source": "/projects",
-      "destination": "/projects.html",
-      "permanent": true
-    },
-    {
-      "source": "/red-iron-buildings",
-      "destination": "/red-iron-buildings.html",
-      "permanent": true
-    },
-    {
-      "source": "/scottsbluff-gering-morrill",
-      "destination": "/scottsbluff-gering-morrill.html",
-      "permanent": true
-    },
-    {
-      "source": "/what-you-need-to-order-metal-panels",
-      "destination": "/what-you-need-to-order-metal-panels.html",
+      "source": "/index",
+      "destination": "/",
       "permanent": true
     }
   ],
@@ -133,5 +58,6 @@
       "source": "/hail-damage/:path*",
       "destination": "https://ironworks-landing-windows-doors.vercel.app/:path*"
     }
-  ]
+  ],
+  "cleanUrls": true
 }

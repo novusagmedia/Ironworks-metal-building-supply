@@ -32,7 +32,7 @@ function bindForm(formId, successId, endpoint, thanksUrl) {
   form.addEventListener('submit', (e) => { e.preventDefault(); submitToFormspree(form, successId, endpoint, thanksUrl); });
 }
 
-bindForm('quote-form', 'success-msg', 'https://formspree.io/f/xzdqvnlk', 'thanks-fit-check.html');
-bindForm('contractor-form', 'contractor-success', 'https://formspree.io/f/xzdqvnlk', 'thanks-contractor.html');
-bindForm('designer-form', 'designer-success', 'https://formspree.io/f/xzdqvnlk', 'thanks-3d.html');
+bindForm('quote-form', 'success-msg', 'https://formspree.io/f/xzdqvnlk', '/thanks-fit-check');
+bindForm('contractor-form', 'contractor-success', 'https://formspree.io/f/xzdqvnlk', '/thanks-contractor');
+bindForm('designer-form', 'designer-success', 'https://formspree.io/f/xzdqvnlk', '/thanks-3d');
 bindForm('hail-form', 'hail-success', 'https://formspree.io/f/xojojqrr');
