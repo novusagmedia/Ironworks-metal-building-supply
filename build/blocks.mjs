@@ -92,11 +92,12 @@ function ctaHtml(key) {
     </aside>`;
 }
 
-function render({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta, ogImage, noindex, draft, allow = [], schemaExtra = [], published = '2026-09-26' }, kind) {
+function render({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta, ogImage, noindex, draft, allow = [], schemaExtra = [], published = '2026-09-26', funnel }, kind) {
   // draft: awaiting Spencer's technical sign-off → noindex, no sitemap, and no live page may link to it.
   if (draft) noindex = true;
   const file = `${slug}.html`;
-  const page = { file, title, desc, ogImage, noindex, ogType: kind === 'article' ? 'article' : 'website', navScrolled: true };
+  const page = { file, title, desc, ogImage, noindex, ogType: kind === 'article' ? 'article' : 'website', navScrolled: true,
+    funnel: funnel || (cta === 'contractor' || cta === 'building' ? cta : 'general') };
   const faqBlock = faqHtml(faqs);
 
   const body = `

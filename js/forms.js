@@ -11,7 +11,7 @@ async function submitToFormspree(form, successId, endpoint, thanksUrl) {
       body: new FormData(form)
     });
     if (res.ok) {
-      if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: form.id });
+      if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: form.id, funnel: form.id === 'contractor-form' ? 'contractor' : form.id === 'hail-form' ? 'hail' : 'building' });
       if (thanksUrl) { window.location.href = thanksUrl; return; }
       form.style.display = 'none';
       const msg = document.getElementById(successId);

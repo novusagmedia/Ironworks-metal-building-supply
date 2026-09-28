@@ -105,7 +105,7 @@ ${schemas}
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
   <link rel="stylesheet" href="css/ironworks.css"/>
 </head>
-<body>
+<body data-funnel="${p.funnel || 'general'}">
 `;
 }
 

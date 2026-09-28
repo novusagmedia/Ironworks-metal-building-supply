@@ -20,19 +20,19 @@ const pages = [
     schema: [businessSchema(), { '@context': 'https://schema.org', '@type': 'WebSite', name: F.name, url: `${F.domain}/` }],
   },
   {
-    file: 'contractors.html', title: 'Contractor Job Specification Review | Ironworks',
+    file: 'contractors.html', funnel: 'contractor', title: 'Contractor Job Specification Review | Ironworks',
     desc: 'Metal panels, trim, and building material for regional contractors. Send an active or upcoming job for a specification review and reorder-ready pricing.',
     ogImage: 'Real_pictures/8.webp', body: body('contractors'), navScrolled: true, scripts: ['js/forms.js'],
     schema: crumbs('For Contractors', 'contractors.html'),
   },
   {
-    file: 'get-a-quote.html', title: `Building Project Fit Check | ${F.name}`,
+    file: 'get-a-quote.html', funnel: 'building', title: `Building Project Fit Check | ${F.name}`,
     desc: 'Tell Ironworks about your building project. A local builder reviews it for your location in NE, WY, SD, or northern CO and follows up with a next step.',
     ogImage: 'Real_pictures/1.webp', body: body('get-a-quote'), navScrolled: true, scripts: ['js/forms.js'],
     schema: crumbs('Building Project Fit Check', 'get-a-quote.html'),
   },
   {
-    file: '3d-designer.html', title: `3D Building Designer | ${F.name}`,
+    file: '3d-designer.html', funnel: 'building', title: `3D Building Designer | ${F.name}`,
     desc: 'Design your metal building in 3D: post-frame, cold-form steel, or red iron. Configure it in minutes, then get a detailed quote from a local builder.',
     ogImage: 'Real_pictures/7.webp', body: body('3d-designer'), solidNav: true, scripts: ['js/forms.js'],
     schema: crumbs('3D Building Designer', '3d-designer.html'),
