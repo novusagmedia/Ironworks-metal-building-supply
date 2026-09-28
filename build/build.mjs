@@ -5,6 +5,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { F } from './facts.mjs';
 import { head, nav, footer, businessSchema, breadcrumbSchema, pageUrl } from './layout.mjs';
+import { INDEXNOW_KEY } from './indexnow.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HERE = path.join(ROOT, 'build');
@@ -149,6 +150,9 @@ ${live.map((p) => `- [${p.title.replace(/ \| .*$/, '')}](${pageUrl(p)}): ${p.des
 - Facebook: ${F.links.facebook}
 - Instagram: ${F.links.instagram}
 `);
+
+// ---------- IndexNow key file (proves domain ownership to Bing & co.) ----------
+fs.writeFileSync(path.join(ROOT, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY);
 
 // ---------- vercel.json redirects: fixed legacy map + a clean URL for every live page ----------
 const LEGACY = [

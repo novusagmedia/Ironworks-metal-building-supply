@@ -151,6 +151,12 @@ check('llms.txt links resolve to live pages', [...read('llms.txt').matchAll(/\((
   return (!exists(f) || isNoindex(html[f])) && u;
 }));
 
+// 13b. IndexNow key file is present and matches the key in build/indexnow.mjs
+{
+  const { INDEXNOW_KEY } = await import('./indexnow.mjs');
+  check('IndexNow key file present', [!exists(`${INDEXNOW_KEY}.txt`) && 'missing key file', exists(`${INDEXNOW_KEY}.txt`) && read(`${INDEXNOW_KEY}.txt`).trim() !== INDEXNOW_KEY && 'key file content mismatch']);
+}
+
 // 14. Rendered checks: buttons, overflow, nav (puppeteer against localhost:3000)
 {
   const f = [];

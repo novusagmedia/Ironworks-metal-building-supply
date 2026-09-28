@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "node build/build.mjs",
-    "verify": "node build/verify.mjs"
+    "verify": "node build/verify.mjs",
+    "indexnow": "node build/indexnow.mjs"
   },
   "keywords": [],
   "author": "",
