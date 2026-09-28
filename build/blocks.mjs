@@ -92,7 +92,7 @@ function ctaHtml(key) {
     </aside>`;
 }
 
-function render({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta, ogImage, noindex, draft, allow = [] }, kind) {
+function render({ slug, title, desc, eyebrow, crumb, h1, lead, blocks, faqs, related = [], cta, ogImage, noindex, draft, allow = [], schemaExtra = [], published = '2026-09-26' }, kind) {
   // draft: awaiting Spencer's technical sign-off → noindex, no sitemap, and no live page may link to it.
   if (draft) noindex = true;
   const file = `${slug}.html`;
@@ -128,5 +128,13 @@ ${related.map(([href, t, blurb]) => `      <a href="${href}" class="a-rel"><stro
   const schema = [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name: crumb, url: pageUrl(page) }])];
   const faqSchema = faqSchemaFromHtml(faqBlock);
   if (faqSchema) schema.push(faqSchema);
+  if (kind === 'article') schema.push({
+    '@context': 'https://schema.org', '@type': 'Article',
+    headline: h1.replace(/\*\*|\[|\]\([^)]*\)/g, ''), description: desc,
+    image: `${F.domain}/${ogImage || 'Real_pictures/9.webp'}`,
+    author: { '@id': `${F.domain}/#business` }, publisher: { '@id': `${F.domain}/#business` },
+    datePublished: published, dateModified: published, mainEntityOfPage: pageUrl(page),
+  });
+  schema.push(...schemaExtra);
   return { ...page, crumb, body, schema, kind, draft: !!draft, allow };
 }

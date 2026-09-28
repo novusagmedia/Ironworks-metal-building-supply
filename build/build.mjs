@@ -117,9 +117,50 @@ for (const [file, html] of outputs) fs.writeFileSync(path.join(ROOT, file), html
 const indexable = pages.filter((p) => !p.noindex);
 fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${indexable.map((p) => `  <url>\n    <loc>${pageUrl(p)}</loc>\n  </url>`).join('\n')}
+${indexable.map((p) => `  <url>\n    <loc>${pageUrl(p)}</loc>\n    <lastmod>${new Date().toISOString().slice(0, 10)}</lastmod>\n  </url>`).join('\n')}
 </urlset>
 `);
+
+// ---------- llms.txt (generated from facts + live pages; never hand-edit) ----------
+const and = (xs) => (xs.length < 3 ? xs.join(' and ') : `${xs.slice(0, -1).join(', ')}, and ${xs.at(-1)}`);
+const live = indexable.filter((p) => p.file !== '404.html');
+fs.writeFileSync(path.join(ROOT, 'llms.txt'), `# ${F.name}
+
+> Metal and building supply company in ${F.address.city}, Nebraska, founded in ${F.founded} by ${F.founder.name}. Ironworks rolls PBR panels and custom trim on its own sheet-metal roller, supplies and installs post-frame, cold-form steel, and red iron buildings, and is an authorized retailer of ${F.doorsWindows.garage} and ${F.doorsWindows.windows}. Primary markets are ${and(F.markets)}, with project-specific service across ${and(F.states)}.
+
+## Pages
+${live.map((p) => `- [${p.title.replace(/ \| .*$/, '')}](${pageUrl(p)}): ${p.desc}`).join('\n')}
+
+## Facts worth citing correctly
+- Hours: ${F.hours.text}. ${F.hours.closed}. ${F.hours.pickup}.
+- ${F.delivery}. Delivery is not advertised as free.
+- Panels: ${and(F.panelLines)}. PBR is ${F.pbr.gauge}; colors are ${and(F.pbr.colors.map((c) => c.toLowerCase()))}. ${F.pbr.moreColors}.
+- Ironworks supplies and installs buildings. Concrete is done by subcontractor partners.
+- Ironworks does not publish prices; pricing comes from reviewing the actual job.
+- Ironworks does not guarantee code compliance, turnaround times, or inventory levels.
+- A 3D design is not a quote. Ironworks reviews each design and follows up.
+- Contractor pricing and volume pricing are available.
+
+## Contact
+- Address: ${F.address.street}, ${F.address.city}, ${F.address.region} ${F.address.zip}
+- Phone: ${F.phone.display}
+- Email: ${F.email}
+- Google Business Profile: ${F.links.maps}
+- Facebook: ${F.links.facebook}
+- Instagram: ${F.links.instagram}
+`);
+
+// ---------- vercel.json redirects: fixed legacy map + a clean URL for every live page ----------
+const LEGACY = [
+  { source: '/hail-damage.html', destination: '/hail-damage-inspection.html', permanent: true },
+  { source: '/Previous_sites_inspo/:path*', destination: '/', permanent: true },
+  { source: '/ironworks.html', destination: '/', permanent: true },
+  { source: '/index', destination: '/', permanent: true },
+];
+const vj = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
+vj.redirects = [...LEGACY, ...live.filter((p) => p.file !== 'index.html')
+  .map((p) => ({ source: `/${p.file.replace(/\.html$/, '')}`, destination: `/${p.file}`, permanent: true }))];
+fs.writeFileSync(path.join(ROOT, 'vercel.json'), JSON.stringify(vj, null, 2) + '\n');
 
 console.log(`✓ Built ${outputs.size} pages, sitemap has ${indexable.length} URLs${drafts.size ? `, ${drafts.size} draft(s) awaiting approval: ${[...drafts].join(', ')}` : ''}.`);
 if (warnings.length) console.log('  Notes:\n  ' + warnings.join('\n  '));

@@ -15,6 +15,11 @@ export default page({
   lead: `Ironworks is a metal and building supply company in Morrill, Nebraska, founded by ${F.founder.name} in ${F.founded}.`,
   cta: 'both',
   ogImage: 'Real_pictures/8.webp',
+  schemaExtra: [
+    { '@context': 'https://schema.org', '@type': 'AboutPage', about: { '@id': `${F.domain}/#business` } },
+    { '@context': 'https://schema.org', '@type': 'Person', name: F.founder.name, jobTitle: F.founder.title,
+      worksFor: { '@id': `${F.domain}/#business` }, description: BIO },
+  ],
   blocks: [
     ['h2', 'Who we are'],
     ['p', BIO],

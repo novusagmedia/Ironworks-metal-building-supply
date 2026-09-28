@@ -1,5 +1,6 @@
 import { F, OFFER } from '../facts.mjs';
 import { page } from '../blocks.mjs';
+import { businessSchema } from '../layout.mjs';
 import { andList, phoneLink, emailLink, addressLine, hoursLine } from './_shared.mjs';
 
 export default page({
@@ -11,6 +12,7 @@ export default page({
   h1: 'Talk to Ironworks',
   lead: 'Call, email, or stop by the shop in Morrill. Spencer works directly with customers on project questions.',
   cta: 'both',
+  schemaExtra: [{ '@context': 'https://schema.org', '@type': 'ContactPage', about: { '@id': `${F.domain}/#business` } }, businessSchema()],
   blocks: [
     ['icons', [
       ['Phone', phoneLink],
