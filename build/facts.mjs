@@ -7,6 +7,8 @@ export const F = {
   founder: { name: 'Spencer Bush', title: 'Founder' },
 
   address: { street: '30101 County Road 9', city: 'Morrill', region: 'NE', zip: '69358' },
+  // Pin from the Google Business Profile listing (verified 2026-09-29).
+  geo: { lat: 41.962619, lng: -103.910298 },
   phone: { display: '(308) 672-3891', tel: '3086723891', e164: '+1-308-672-3891' },
   email: 'sales@ironworksbuildingsupply.com',
 
@@ -30,7 +32,9 @@ export const F = {
   doorsWindows: { garage: 'Midland Garage Doors', windows: 'Gerkin Windows' },
 
   links: {
-    maps: 'https://www.google.com/maps/place/?q=place_id:ChIJA8iOdrVmvUURA1_d6H4LjB0',
+    // Google's documented cross-platform format: opens the Business Profile; falls back to the address in any app.
+    // (The old maps/place/?q=place_id: format failed in the Google Maps phone app.)
+    maps: 'https://www.google.com/maps/search/?api=1&query=30101+Co+Rd+9%2C+Morrill%2C+NE+69358&query_place_id=ChIJA8iOdrVmvUURA1_d6H4LjB0',
     review: 'https://g.page/r/CQNf3eh-C4wdEBM/review',
     facebook: 'https://www.facebook.com/profile.php?id=61575009470576',
     instagram: 'https://www.instagram.com/ironworks_mbs/',

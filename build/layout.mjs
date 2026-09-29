@@ -45,6 +45,7 @@ export function businessSchema() {
     email: F.email,
     address: { '@type': 'PostalAddress', streetAddress: a.street, addressLocality: a.city, addressRegion: a.region, postalCode: a.zip, addressCountry: 'US' },
     hasMap: F.links.maps,
+    geo: { '@type': 'GeoCoordinates', latitude: F.geo.lat, longitude: F.geo.lng },
     openingHoursSpecification: F.hours.schema.map((h) => ({ '@type': 'OpeningHoursSpecification', dayOfWeek: h.days, opens: h.opens, closes: h.closes })),
     foundingDate: F.founded,
     founder: { '@type': 'Person', name: F.founder.name, jobTitle: F.founder.title },
