@@ -1,8 +1,9 @@
 import { article, R } from '../blocks.mjs';
 
-// DRAFT: technical content awaits Spencer's sign-off.
+// Live since 2026-10-17 (Giussepe's call, for fresh content). Spencer's technical review stays open:
+// Structure/spencer-review-comparisons.md. Any "fix:" reply gets applied here.
 export default article({
-  draft: true,
+  published: '2026-10-17',
   slug: 'cold-form-vs-red-iron',
   title: 'Cold-Formed Steel vs Red Iron Buildings | Ironworks',
   desc: 'Cold-formed steel is lighter steel shaped at room temperature. Red iron is heavy structural steel. Here’s how they compare and which builds each one fits.',

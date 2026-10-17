@@ -26,5 +26,5 @@ export default page({
     ['Do you sell garage doors and windows?', `Yes. Ironworks is an authorized retailer of ${F.doorsWindows.garage} and ${F.doorsWindows.windows}, year-round.`],
     ['Where do you work?', `${andList(F.states)}, depending on the project.`],
   ],
-  related: [R.PANEL_ORDER, R.PANELS, R.POST_FRAME],
+  related: [R.PANEL_ORDER, R.PBR_VS_R, R.GAUGE_26_29, R.POST_FRAME_VS_STEEL],
 });

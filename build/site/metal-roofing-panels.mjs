@@ -24,5 +24,5 @@ export default page({
     ['h2', 'For contractors'],
     ['p', `Contractor and volume pricing are available. Send an active or upcoming job through the [${OFFER.contractor.name}](${OFFER.contractor.href}) and we’ll review the actual job rather than give a generic number.`],
   ],
-  related: [R.PANEL_ORDER, R.TRIM, R.CONTRACTORS],
+  related: [R.PBR_VS_R, R.AG_VS_PBR, R.GAUGE_26_29, R.PANEL_ORDER],
 });

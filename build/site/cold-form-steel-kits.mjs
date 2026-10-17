@@ -7,5 +7,5 @@ export default systemPage({
   photo: ['Real_pictures/7.webp', 'Cold-form steel arch framing against blue sky', 'Cold-form framing'],
   goodFor: ['Commercial buildings', 'Residential buildings'],
   notes: [['figure', ['Real_pictures/10.webp', 'Cold-form building frame on hillside site', 'Cold-form build on a hillside site']]],
-  related: [R.POST_FRAME, R.RED_IRON, R.PANELS],
+  related: [R.COLD_FORM_VS_RED_IRON, R.POST_FRAME_VS_STEEL, R.POST_FRAME, R.RED_IRON],
 });

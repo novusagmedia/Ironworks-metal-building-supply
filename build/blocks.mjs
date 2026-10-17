@@ -71,6 +71,13 @@ export const R = {
   PROJECTS: ['projects.html', 'Projects', 'Real buildings across the region.'],
   FAQ: ['faq.html', 'Questions & Answers', 'Hours, delivery, colors, pricing, and more.'],
   PANEL_ORDER: ['what-you-need-to-order-metal-panels.html', 'What You Need to Order Metal Panels', 'The nine details to send.'],
+  // Comparison articles (live 2026-10-17)
+  PBR_VS_R: ['pbr-vs-r-panel.html', 'PBR Panel vs R-Panel', 'One extra leg on the overlap, and what it changes.'],
+  AG_VS_PBR: ['ag-panel-vs-pbr-panel.html', 'AG Panel vs PBR vs R-Panel', 'Rib height and spacing, and where each one is used.'],
+  // Card title avoids "29 gauge" (never-write list) so product pages never read as if Ironworks sells it; the article itself is allow-listed.
+  GAUGE_26_29: ['26-vs-29-gauge-metal-roofing.html', 'Which Gauge for Metal Roofing?', 'Lower number, thicker steel. Why 26 gauge, and how to choose.'],
+  POST_FRAME_VS_STEEL: ['post-frame-vs-steel-building.html', 'Post-Frame vs Pole Barn vs Steel Building', 'Wood columns and trusses, or a steel frame on concrete.'],
+  COLD_FORM_VS_RED_IRON: ['cold-form-vs-red-iron.html', 'Cold-Formed Steel vs Red Iron', 'Lighter formed steel, or heavy structural steel.'],
 };
 
 // Homepage Google review cards, rendered from facts so a quote can never drift from its source.

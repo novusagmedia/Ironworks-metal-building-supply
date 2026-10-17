@@ -7,5 +7,5 @@ export default systemPage({
   // No photo: none of the library shows red iron (photos 5/8/13 are galvanized cold-form). See Structure/shot-list.md.
   photo: null,
   goodFor: ['Commercial buildings', 'Industrial buildings'],
-  related: [R.POST_FRAME, R.COLD_FORM, R.PANELS],
+  related: [R.COLD_FORM_VS_RED_IRON, R.POST_FRAME, R.COLD_FORM, R.PANELS],
 });

@@ -1,9 +1,10 @@
 import { F } from '../facts.mjs';
 import { article, R } from '../blocks.mjs';
 
-// DRAFT: technical content awaits Spencer's sign-off.
+// Live since 2026-10-17 (Giussepe's call, for fresh content). Spencer's technical review stays open:
+// Structure/spencer-review-comparisons.md. Any "fix:" reply gets applied here.
 export default article({
-  draft: true,
+  published: '2026-10-17',
   slug: 'ag-panel-vs-pbr-panel',
   title: 'AG Panel vs PBR vs R-Panel: Which Metal Panel? | Ironworks',
   desc: 'AG panels have lower, closer ribs. PBR and R-panel have taller, wider ribs. Here’s how the three compare and where each one is usually used.',

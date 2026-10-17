@@ -8,5 +8,5 @@ export default systemPage({
   photo: ['Real_pictures/9.webp', 'Post-frame barndominium at golden hour built by Ironworks', 'Post-frame barndominium'],
   goodFor: ['Ag barns and shops', 'Equipment storage buildings', 'Personal shops and garages', 'Horse barns and hobby buildings', 'Small commercial projects'],
   notes: [['figure', ['Real_pictures/6.webp', 'Tan post-frame barn with carriage doors', 'Post-frame barn']]],
-  related: [R.COLD_FORM, R.RED_IRON, R.PANELS],
+  related: [R.POST_FRAME_VS_STEEL, R.COLD_FORM, R.RED_IRON, R.PANELS],
 });

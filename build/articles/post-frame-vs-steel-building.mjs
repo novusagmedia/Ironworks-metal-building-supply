@@ -1,9 +1,10 @@
 import { OFFER } from '../facts.mjs';
 import { article, R } from '../blocks.mjs';
 
-// DRAFT: technical content awaits Spencer's sign-off.
+// Live since 2026-10-17 (Giussepe's call, for fresh content). Spencer's technical review stays open:
+// Structure/spencer-review-comparisons.md. Any "fix:" reply gets applied here.
 export default article({
-  draft: true,
+  published: '2026-10-17',
   slug: 'post-frame-vs-steel-building',
   title: 'Post-Frame vs Pole Barn vs Steel Building | Ironworks',
   desc: 'Post-frame is today’s version of the pole barn: wood columns and trusses with a metal skin. A steel building uses a steel frame on a concrete foundation.',

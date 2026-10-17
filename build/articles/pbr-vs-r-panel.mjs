@@ -1,9 +1,10 @@
 import { F } from '../facts.mjs';
 import { article, R } from '../blocks.mjs';
 
-// DRAFT: technical content awaits Spencer's sign-off (Structure/spencer-review-comparisons.md).
+// Live since 2026-10-17 (Giussepe's call, for fresh content). Spencer's technical review stays open:
+// Structure/spencer-review-comparisons.md. Any "fix:" reply gets applied here.
 export default article({
-  draft: true,
+  published: '2026-10-17',
   slug: 'pbr-vs-r-panel',
   title: 'PBR Panel vs R-Panel: What’s the Difference? | Ironworks',
   desc: 'PBR and R-panel look almost the same. The difference is the purlin bearing leg on the PBR overlap. Here’s what that changes and when each one fits.',

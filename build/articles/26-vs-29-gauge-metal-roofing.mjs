@@ -1,9 +1,10 @@
 import { F } from '../facts.mjs';
 import { article, R } from '../blocks.mjs';
 
-// DRAFT: technical content awaits Spencer's sign-off.
+// Live since 2026-10-17 (Giussepe's call, for fresh content). Spencer's technical review stays open:
+// Structure/spencer-review-comparisons.md. Any "fix:" reply gets applied here.
 export default article({
-  draft: true,
+  published: '2026-10-17',
   allow: ['29 gauge'], // comparison must name it; Ironworks' own PBR is 26 gauge
   slug: '26-vs-29-gauge-metal-roofing',
   title: '26 Gauge vs 29 Gauge Metal Roofing | Ironworks',
