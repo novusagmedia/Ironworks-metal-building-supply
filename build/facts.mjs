@@ -36,12 +36,24 @@ export const F = {
     // (The old maps/place/?q=place_id: format failed in the Google Maps phone app.)
     maps: 'https://www.google.com/maps/search/?api=1&query=30101+Co+Rd+9%2C+Morrill%2C+NE+69358&query_place_id=ChIJA8iOdrVmvUURA1_d6H4LjB0',
     review: 'https://g.page/r/CQNf3eh-C4wdEBM/review',
+    // Google's documented "read the reviews" URL for a place ID.
+    reviews: 'https://search.google.com/local/reviews?placeid=ChIJA8iOdrVmvUURA1_d6H4LjB0',
     facebook: 'https://www.facebook.com/profile.php?id=61575009470576',
     instagram: 'https://www.instagram.com/ironworks_mbs/',
     designer: 'https://design.ironworksbuildingsupply.com/',
   },
 
   ga4: 'G-PGCKWH38WE',
+  // Meta Pixel ID (digits only) from Meta Events Manager. Empty = no pixel on the site. Once set, layout.mjs
+  // adds the base code and forms.js sends a Lead event on every form send. Audit 2026-10-16: 11 Meta ads
+  // were running with no pixel, so nothing could be retargeted or optimized for leads.
+  metaPixel: '',
+  // Public Google reviews, verbatim from the Business Profile (fetched 2026-10-17; both answered by the owner).
+  // Rendered on the homepage by blocks.mjs → googleReviews(). Add new ones here; never retype a quote elsewhere.
+  googleReviews: [
+    { name: 'Nathaniel Miles', stars: 5, year: 2026, text: 'Been getting windbreak tin for livestock panels and facilities for a while now. Good price n product and good people. My go to painted steel roofing as well.' },
+    { name: 'Rachel Wright', stars: 5, year: 2026, text: 'Ryan at Ironworks was great to work with. He handled our shop project from start to finish and made the whole process easy. Excellent service and great people. Highly recommend Ironworks Metal & Building Supply.' },
+  ],
   logo: 'Brand_assets/ironworks-logo.webp',
 };
 

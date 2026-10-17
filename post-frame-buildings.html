@@ -32,9 +32,8 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"Service","name":"Post-Frame Buildings","serviceType":"Post-Frame Buildings","description":"Post-frame buildings for ag, commercial, and residential use in the Scottsbluff-Morrill region. Designed, supplied, and installed by Ironworks.","provider":{"@id":"https://www.ironworksbuildingsupply.com/#business"},"areaServed":[{"@type":"AdministrativeArea","name":"Nebraska"},{"@type":"AdministrativeArea","name":"Wyoming"},{"@type":"AdministrativeArea","name":"South Dakota"},{"@type":"AdministrativeArea","name":"northern Colorado"}]}
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="fonts/league-spartan-var.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="icon" href="favicon-32.png" sizes="32x32"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -45,7 +44,7 @@
 <!-- ── NAV ── -->
 <nav class="nav scrolled" id="nav">
   <a href="/" aria-label="Ironworks home">
-    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo" sizes="60px" loading="eager" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" decoding="async"/>
   </a>
   <ul class="nav-links">
     <li class="has-sub on">
@@ -101,19 +100,19 @@
   <div class="shell">
     <nav class="a-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Post-Frame Buildings</span></nav>
     <span class="eyebrow on-dark">Buildings</span>
-    <h1>Post-Frame Buildings</h1>
+    <h1>Post-Frame Buildings for Scottsbluff, Gering, and Morrill</h1>
     <p>The most versatile system for ag, commercial, and residential. Strong, fast to build, and cost-effective across large spans.</p>
   </div>
 </header>
 
 <main class="a-main">
   <article class="a-body">
-    <figure class="a-fig"><img src="Real_pictures/9.webp" width="1448" height="1086" alt="Post-frame barndominium at golden hour built by Ironworks" loading="lazy"/><figcaption>Post-frame barndominium</figcaption></figure>
+    <figure class="a-fig"><img src="Real_pictures/9.webp" width="1448" height="1086" alt="Post-frame barndominium at golden hour built by Ironworks" loading="lazy" sizes="(max-width: 820px) 100vw, 760px" srcset="Real_pictures/r/9-400.webp 400w, Real_pictures/r/9-640.webp 640w, Real_pictures/r/9-800.webp 800w, Real_pictures/r/9-1080.webp 1080w, Real_pictures/r/9-1280.webp 1280w, Real_pictures/r/9-1448.webp 1448w" decoding="async"/><figcaption>Post-frame barndominium</figcaption></figure>
     <h2 class="a-h2">What post-frame buildings are good for</h2>
     <ul class="a-list"><li>Ag barns and shops</li><li>Equipment storage buildings</li><li>Personal shops and garages</li><li>Horse barns and hobby buildings</li><li>Small commercial projects</li></ul>
     <h2 class="a-h2">What Ironworks provides</h2>
     <ul class="a-icons"><li><strong>Design</strong> — Lay it out in the <a href="/3d-designer">3D designer</a>, then Spencer’s team reviews it with you.</li><li><strong>Review for your location</strong> — Every project is reviewed for where it will stand: your site, your wind, your snow.</li><li><strong>Materials</strong> — 26 gauge PBR panels in 8 colors, plus trim rolled on our own sheet-metal roller.</li><li><strong>Installation</strong> — Ironworks can take the building from design through installation. Concrete is handled by our subcontractor partners.</li><li><strong>Delivery</strong> — Delivery is available roughly 250+ miles out, depending on the project.</li></ul>
-    <figure class="a-fig"><img src="Real_pictures/6.webp" width="1600" height="900" alt="Tan post-frame barn with carriage doors" loading="lazy"/><figcaption>Post-frame barn</figcaption></figure>
+    <figure class="a-fig"><img src="Real_pictures/6.webp" width="1600" height="900" alt="Tan post-frame barn with carriage doors" loading="lazy" sizes="(max-width: 820px) 100vw, 760px" srcset="Real_pictures/r/6-400.webp 400w, Real_pictures/r/6-640.webp 640w, Real_pictures/r/6-800.webp 800w, Real_pictures/r/6-1080.webp 1080w, Real_pictures/r/6-1280.webp 1280w, Real_pictures/r/6-1600.webp 1600w" decoding="async"/><figcaption>Post-frame barn</figcaption></figure>
     <h2 class="a-h2">How to start</h2>
     <p>Start a <a href="/get-a-quote">Building Project Fit Check</a> with your use, site, size, and timeline. For building projects, Spencer’s team calls to go over the details and then meets with you in person. Ironworks serves Nebraska, Wyoming, South Dakota, and northern Colorado.</p>
     
@@ -139,7 +138,7 @@
 <footer class="foot">
   <div class="shell">
     <div>
-      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo" sizes="60px" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" loading="lazy" decoding="async"/>
       <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
       <div class="foot-social">
         <a href="https://www.facebook.com/profile.php?id=61575009470576" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="#8B9CAE" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>

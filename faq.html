@@ -32,9 +32,8 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What are your hours?","acceptedAnswer":{"@type":"Answer","text":"Monday–Friday, 8:00 AM–5:00 PM. Closed on federal holidays."}},{"@type":"Question","name":"Can I pick up my order?","acceptedAnswer":{"@type":"Answer","text":"Yes, at 30101 County Road 9, Morrill, NE 69358. Pickups follow normal business hours."}},{"@type":"Question","name":"How far do you deliver?","acceptedAnswer":{"@type":"Answer","text":"Delivery is available roughly 250+ miles out, depending on the project. Primary markets are Scottsbluff, Gering, and Morrill."}},{"@type":"Question","name":"What panels do you carry?","acceptedAnswer":{"@type":"Answer","text":"PBR panel, AG panel, and R-panel. PBR panels are 26 gauge."}},{"@type":"Question","name":"What colors do PBR panels come in?","acceptedAnswer":{"@type":"Answer","text":"White, Gray, Tan, Red, Blue, Black, Copper, and Dark green. Additional colors are available by order."}},{"@type":"Question","name":"Why don’t you list prices online?","acceptedAnswer":{"@type":"Answer","text":"Pricing depends on the actual job. We do not want to guess at scope, timing, or price, so we review your project and give you real numbers."}},{"@type":"Question","name":"Is a 3D design the same as a quote?","acceptedAnswer":{"@type":"Answer","text":"No. The 3D designer helps you lay out the building. Pricing comes after Spencer’s team reviews your site and project."}},{"@type":"Question","name":"Do you install buildings?","acceptedAnswer":{"@type":"Answer","text":"Yes. Ironworks can take a building from design through installation. Concrete is handled by our subcontractor partners."}},{"@type":"Question","name":"Do you work with contractors?","acceptedAnswer":{"@type":"Answer","text":"Yes. Contractor pricing and volume pricing are available."}},{"@type":"Question","name":"Do you sell garage doors and windows?","acceptedAnswer":{"@type":"Answer","text":"Yes. Ironworks is an authorized retailer of Midland Garage Doors and Gerkin Windows, year-round."}},{"@type":"Question","name":"Where do you work?","acceptedAnswer":{"@type":"Answer","text":"Nebraska, Wyoming, South Dakota, and northern Colorado, depending on the project."}}]}
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="fonts/league-spartan-var.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="icon" href="favicon-32.png" sizes="32x32"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -45,7 +44,7 @@
 <!-- ── NAV ── -->
 <nav class="nav scrolled" id="nav">
   <a href="/" aria-label="Ironworks home">
-    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo" sizes="60px" loading="eager" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" decoding="async"/>
   </a>
   <ul class="nav-links">
     <li class="has-sub">
@@ -133,7 +132,7 @@
 <footer class="foot">
   <div class="shell">
     <div>
-      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo" sizes="60px" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" loading="lazy" decoding="async"/>
       <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
       <div class="foot-social">
         <a href="https://www.facebook.com/profile.php?id=61575009470576" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="#8B9CAE" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>

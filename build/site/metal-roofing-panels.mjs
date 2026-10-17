@@ -8,7 +8,7 @@ export default page({
   desc: `PBR, AG, and R-panel metal roofing and siding from Morrill, NE. PBR in ${F.pbr.gauge} and ${F.pbr.colors.length} colors, with more by order. Pickup or delivery.`,
   eyebrow: 'Panels & Trim',
   crumb: 'Metal Roofing & Siding Panels',
-  h1: 'Metal Roofing & Siding Panels',
+  h1: 'Metal Roofing & Siding Panels, Rolled in Morrill, NE',
   lead: `${andList(F.panelLines)} for roofs and walls, rolled on our own sheet-metal roller in Morrill. Pickup or delivery.`,
   cta: 'contractor',
   ogImage: 'Real_pictures/14.webp',

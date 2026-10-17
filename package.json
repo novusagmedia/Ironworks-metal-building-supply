@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node build/build.mjs",
+    "build": "node build/resize.mjs && node build/build.mjs",
+    "resize": "node build/resize.mjs",
     "verify": "node build/verify.mjs",
     "indexnow": "node build/indexnow.mjs"
   },

@@ -45,27 +45,28 @@ const revealObs = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 document.querySelectorAll('.rv').forEach(el => revealObs.observe(el));
 
-/* count-up stats */
-function animateCounter(el) {
-  const target = parseFloat(el.dataset.to);
-  const suffix = el.dataset.sfx || '';
-  const dur = 1700, start = performance.now();
-  function tick(now) {
-    const p = Math.min((now - start) / dur, 1);
-    const ease = 1 - Math.pow(1 - p, 3);
-    el.firstChild.textContent = Math.floor(target * ease);
-    if (p < 1) requestAnimationFrame(tick);
-    else el.firstChild.textContent = target;
-  }
-  requestAnimationFrame(tick);
-}
-const counters = document.querySelectorAll('[data-to]');
-if (counters.length) {
+/* count-up stats. The real number is in the HTML, so crawlers, no-JS visitors, and screen readers
+   never see a 0. The animation only replaces what sighted users see, and is skipped under reduced motion. */
+const counters = document.querySelectorAll('[data-to] .num');
+if (counters.length && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  counters.forEach(el => {
+    const sr = document.createElement('span'); sr.className = 'sr-only'; sr.textContent = el.textContent;
+    el.before(sr); el.setAttribute('aria-hidden', 'true'); el.textContent = '0';
+  });
+  const animate = (el) => {
+    const target = parseFloat(el.parentElement.dataset.to), dur = 1700, start = performance.now();
+    const tick = (now) => {
+      const p = Math.min((now - start) / dur, 1);
+      el.textContent = p < 1 ? Math.floor(target * (1 - Math.pow(1 - p, 3))) : target;
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
   let done = false;
   const cObs = new IntersectionObserver((entries) => {
-    if (!done && entries.some(e => e.isIntersecting)) { done = true; counters.forEach(animateCounter); }
+    if (!done && entries.some(e => e.isIntersecting)) { done = true; counters.forEach(animate); }
   }, { threshold: 0.4 });
-  counters.forEach(el => cObs.observe(el));
+  counters.forEach(el => cObs.observe(el.parentElement));
 }
 
 /* GA4 conversion events. Sends only the event type, funnel, and where on the page: no personal data. */
@@ -83,6 +84,7 @@ if (counters.length) {
     else if (href.startsWith('mailto:')) send('email_click', p);
     else if (href.includes('google.com/maps')) send('directions_click', p);
     else if (href.includes('g.page/r/')) send('review_click', p);
+    else if (href.includes('search.google.com/local/reviews')) send('reviews_open', p);
     else if (page.startsWith('3d-designer') || page === '#designer' || page === 'index#designer') send('designer_open', p);
     else if (page.startsWith('contractors')) send('offer_click', { ...p, offer: 'contractor' });
     else if (page.startsWith('get-a-quote')) send('offer_click', { ...p, offer: 'building' });

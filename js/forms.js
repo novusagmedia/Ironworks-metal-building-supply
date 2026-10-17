@@ -1,4 +1,7 @@
-/* IRONWORKS — Formspree submit handling */
+/* IRONWORKS — Formspree submit handling + funnel events (GA4 always; Meta Lead once a Pixel is installed) */
+const funnelOf = (form) => form.id === 'contractor-form' ? 'contractor' : form.id === 'hail-form' ? 'hail' : 'building';
+const ga = (name, params) => { if (typeof gtag === 'function') gtag('event', name, params); };
+
 async function submitToFormspree(form, successId, endpoint, thanksUrl) {
   const btn = form.querySelector('[type="submit"]');
   const original = btn.textContent;
@@ -11,7 +14,8 @@ async function submitToFormspree(form, successId, endpoint, thanksUrl) {
       body: new FormData(form)
     });
     if (res.ok) {
-      if (typeof gtag === 'function') gtag('event', 'generate_lead', { form_id: form.id, funnel: form.id === 'contractor-form' ? 'contractor' : form.id === 'hail-form' ? 'hail' : 'building' });
+      ga('generate_lead', { form_id: form.id, funnel: funnelOf(form) });
+      if (typeof fbq === 'function') fbq('track', 'Lead', { content_name: form.id });
       if (thanksUrl) { window.location.href = thanksUrl; return; }
       form.style.display = 'none';
       const msg = document.getElementById(successId);
@@ -29,6 +33,11 @@ async function submitToFormspree(form, successId, endpoint, thanksUrl) {
 function bindForm(formId, successId, endpoint, thanksUrl) {
   const form = document.getElementById(formId);
   if (!form) return;
+  // form_start fires once, at the first keystroke or choice, so starts can be compared with sends (drop-off).
+  let started = false;
+  const start = () => { if (started) return; started = true; ga('form_start', { form_id: form.id, funnel: funnelOf(form) }); };
+  form.addEventListener('input', start);
+  form.addEventListener('change', start);
   form.addEventListener('submit', (e) => { e.preventDefault(); submitToFormspree(form, successId, endpoint, thanksUrl); });
 }
 

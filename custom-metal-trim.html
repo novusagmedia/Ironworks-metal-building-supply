@@ -29,9 +29,8 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://www.ironworksbuildingsupply.com/"},{"@type":"ListItem","position":2,"name":"Custom Metal Trim","item":"https://www.ironworksbuildingsupply.com/custom-metal-trim"}]}
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preload" href="fonts/league-spartan-var.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="icon" href="favicon-32.png" sizes="32x32"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -42,7 +41,7 @@
 <!-- ── NAV ── -->
 <nav class="nav scrolled" id="nav">
   <a href="/" aria-label="Ironworks home">
-    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo" sizes="60px" loading="eager" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" decoding="async"/>
   </a>
   <ul class="nav-links">
     <li class="has-sub">
@@ -98,7 +97,7 @@
   <div class="shell">
     <nav class="a-crumbs" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Custom Metal Trim</span></nav>
     <span class="eyebrow on-dark">Panels &amp; Trim</span>
-    <h1>Custom Metal Trim &amp; Hardware</h1>
+    <h1>Custom Metal Trim &amp; Hardware, Rolled in Morrill, NE</h1>
     <p>Custom trim profiles rolled on our own sheet-metal roller, made to the spec your job needs. Fasteners and hardware too.</p>
   </div>
 </header>
@@ -136,7 +135,7 @@
 <footer class="foot">
   <div class="shell">
     <div>
-      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo" sizes="60px" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" loading="lazy" decoding="async"/>
       <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
       <div class="foot-social">
         <a href="https://www.facebook.com/profile.php?id=61575009470576" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="#8B9CAE" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>

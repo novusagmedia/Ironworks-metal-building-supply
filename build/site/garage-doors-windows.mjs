@@ -8,7 +8,7 @@ export default page({
   desc: `Ironworks is an authorized retailer of ${F.doorsWindows.garage} and ${F.doorsWindows.windows}. Custom orders year-round from Morrill, NE. Garage door seals too.`,
   eyebrow: 'Doors & Windows',
   crumb: 'Garage Doors & Windows',
-  h1: 'Garage Doors & Windows',
+  h1: 'Garage Doors & Windows in Morrill, NE',
   lead: `Ironworks is an authorized retailer of ${F.doorsWindows.garage} and ${F.doorsWindows.windows}. Custom doors and windows can be ordered any time of year.`,
   cta: 'both',
   blocks: [

@@ -70,6 +70,12 @@ export function breadcrumbSchema(trail) {
   };
 }
 
+// Meta Pixel. Renders nothing until F.metaPixel holds the Pixel ID from Events Manager; forms.js then sends Lead on every form send.
+const pixel = () => (F.metaPixel ? `
+<!-- Meta Pixel -->
+<script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${F.metaPixel}');fbq('track','PageView');</script>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=${F.metaPixel}&ev=PageView&noscript=1"/></noscript>` : '');
+
 export function head(p) {
   const url = pageUrl(p);
   const img = `${F.domain}/${p.ogImage || 'Real_pictures/9.webp'}`;
@@ -84,7 +90,7 @@ export function head(p) {
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', '${F.ga4}');
-</script>
+</script>${pixel()}
   <meta charset="UTF-8"/>${p.file === '404.html' ? '\n  <base href="/"/>' : ''}
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>${esc(p.title)}</title>
@@ -103,9 +109,8 @@ export function head(p) {
   <meta name="twitter:description" content="${esc(p.desc)}"/>
   <meta name="twitter:image" content="${img}"/>
 ${schemas}
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet"/>
+${p.lcp ? `  <link rel="preload" as="image" imagesrcset="${p.lcp.srcset}" imagesizes="${p.lcp.sizes}" fetchpriority="high"/>\n` : ''}  <link rel="preload" href="fonts/league-spartan-var.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="icon" href="favicon-32.png" sizes="32x32"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -135,7 +140,7 @@ ${n.items.map((c) => `        <li><a href="${c.href}"${on(c.href)}>${c.label}</a
 <!-- ── NAV ── -->
 <nav class="${cls}" id="nav"${attrs}>
   <a href="index.html" aria-label="Ironworks home">
-    <img src="${F.logo}" alt="${esc(F.name)}" class="nav-logo"/>
+    <img src="${F.logo}" alt="${esc(F.name)}" class="nav-logo" sizes="60px" loading="eager"/>
   </a>
   <ul class="nav-links">
 ${items}
@@ -164,7 +169,7 @@ export function footer(p) {
 <footer class="foot">
   <div class="shell">
     <div>
-      <img src="${F.logo}" alt="${esc(F.name)}" class="foot-logo"/>
+      <img src="${F.logo}" alt="${esc(F.name)}" class="foot-logo" sizes="60px"/>
       <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
       <div class="foot-social">
         <a href="${F.links.facebook}" target="_blank" rel="noopener" aria-label="Facebook">${ICON_FB}</a>

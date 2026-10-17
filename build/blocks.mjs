@@ -31,8 +31,8 @@ function renderBlock([type, data], index) {
     case 'icons': return `<ul class="a-icons">${data.map(([term, def]) => `<li><strong>${inline(term)}</strong> — ${inline(def)}</li>`).join('')}</ul>`;
     case 'note': return `<p class="a-note">${inline(data)}</p>`;
     // Real Ironworks photos only (Brand Foundation §18). [src, alt, caption]
-    case 'figure': return `<figure class="a-fig"><img src="${data[0]}"${dims(data[0])} alt="${esc(data[1])}" loading="lazy"/>${data[2] ? `<figcaption>${inline(data[2])}</figcaption>` : ''}</figure>`;
-    case 'gallery': return `<div class="a-gallery">${data.map(([src, alt, label]) => `<figure class="a-gi"><img src="${src}"${dims(src)} alt="${esc(alt)}" loading="lazy"/><figcaption>${esc(label)}</figcaption></figure>`).join('')}</div>`;
+    case 'figure': return `<figure class="a-fig"><img src="${data[0]}"${dims(data[0])} alt="${esc(data[1])}" loading="lazy" sizes="(max-width: 820px) 100vw, 760px"/>${data[2] ? `<figcaption>${inline(data[2])}</figcaption>` : ''}</figure>`;
+    case 'gallery': return `<div class="a-gallery">${data.map(([src, alt, label]) => `<figure class="a-gi"><img src="${src}"${dims(src)} alt="${esc(alt)}" loading="lazy" sizes="(max-width: 480px) 100vw, (max-width: 760px) 50vw, 250px"/><figcaption>${esc(label)}</figcaption></figure>`).join('')}</div>`;
     default: throw new Error(`Unknown block type "${type}". Allowed: h2, p, list, callout, icons, note, figure, gallery.`);
   }
 }
@@ -72,6 +72,17 @@ export const R = {
   FAQ: ['faq.html', 'Questions & Answers', 'Hours, delivery, colors, pricing, and more.'],
   PANEL_ORDER: ['what-you-need-to-order-metal-panels.html', 'What You Need to Order Metal Panels', 'The nine details to send.'],
 };
+
+// Homepage Google review cards, rendered from facts so a quote can never drift from its source.
+const STAR = '<svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>';
+export function googleReviews() {
+  return F.googleReviews.map((r, i) => `<figure class="tcard gcard rv${i ? ` d${i}` : ''}">
+      <div class="gsrc">Google review</div>
+      <div class="stars" role="img" aria-label="${r.stars} out of 5 stars">${STAR.repeat(r.stars)}</div>
+      <p>&ldquo;${esc(r.text)}&rdquo;</p>
+      <figcaption><div class="who">${esc(r.name)}</div><div class="role"><a href="${F.links.reviews}" target="_blank" rel="noopener">Posted on Google · ${r.year}</a></div></figcaption>
+    </figure>`).join('\n    ');
+}
 
 export const article = (opts) => render({ cta: 'contractor', ...opts }, 'article');
 // Non-article pages (contact, about, thank-you, legal): same renderer, website type, optional CTA.

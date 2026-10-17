@@ -5,25 +5,55 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { F } from './facts.mjs';
 import { head, nav, footer, businessSchema, breadcrumbSchema, pageUrl, cleanPath, cleanLinks } from './layout.mjs';
+import { googleReviews } from './blocks.mjs';
 import { INDEXNOW_KEY } from './indexnow.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const HERE = path.join(ROOT, 'build');
+const problems = [];
+const warnings = [];
 const body = (name) => fs.readFileSync(path.join(HERE, 'pages', `${name}.body.html`), 'utf8');
 const crumbs = (name, file) => [breadcrumbSchema([{ name: 'Home', url: `${F.domain}/` }, { name, url: `${F.domain}${cleanPath(file)}` }])];
+
+// ---------- responsive images ----------
+// build/resize.mjs writes sized variants + variants.json; images.mjs writes images.json (source dimensions).
+// Every <img src="Real_pictures/…|Brand_assets/…"> gets width/height (no layout shift), a srcset of the
+// variants, and lazy loading, unless the page marks it fetchpriority="high" (the one LCP image).
+// Pages set `sizes` per slot; a missing sizes falls back to 100vw and is reported, since it over-fetches in grids.
+const VARIANTS = JSON.parse(fs.readFileSync(path.join(HERE, 'variants.json'), 'utf8'));
+const IMGDIM = JSON.parse(fs.readFileSync(path.join(HERE, 'images.json'), 'utf8'));
+const srcsetOf = (src) => VARIANTS[src].map((v) => `${v.file} ${v.w}w`).join(', ');
+function responsive(html, file) {
+  return html.replace(/<img\b([^>]*?)\s*\/?>/g, (tag, attrs) => {
+    const src = attrs.match(/\bsrc="([^"]+)"/)?.[1];
+    if (!src || !VARIANTS[src]) return tag;
+    const has = (a) => new RegExp(`\\b${a}="`).test(attrs);
+    let out = attrs.trim();
+    if (IMGDIM[src] && !has('width')) out += ` width="${IMGDIM[src].w}" height="${IMGDIM[src].h}"`;
+    if (!has('srcset')) out += ` srcset="${srcsetOf(src)}"`;
+    if (!has('sizes')) { out += ' sizes="100vw"'; warnings.push(`${file}: ${src} has no sizes attribute (defaulting to 100vw)`); }
+    const lcp = /fetchpriority="high"/.test(attrs);
+    if (!lcp && !has('loading')) out += ' loading="lazy"';
+    if (!lcp && !has('decoding')) out += ' decoding="async"';
+    return `<img ${out}/>`;
+  });
+}
 
 // ---------- pages whose body is hand-built markup ----------
 const pages = [
   {
     file: 'index.html', title: `${F.name} | Morrill, NE`,
     desc: 'Metal buildings, 26 gauge PBR panels, and custom trim from Morrill, NE. Design your building in 3D, then talk to a real builder.',
-    ogImage: 'Real_pictures/9.webp', body: body('index'),
+    ogImage: 'Real_pictures/9.webp', body: body('index').replace('<!-- GOOGLE_REVIEWS -->', googleReviews()),
+    // The hero photo is the largest thing on the first screen; preloading it is what gets it on screen first.
+    lcp: { src: 'Real_pictures/9.webp', sizes: '100vw' },
     schema: [businessSchema(), { '@context': 'https://schema.org', '@type': 'WebSite', name: F.name, url: `${F.domain}/` }],
   },
   {
     file: 'contractors.html', funnel: 'contractor', title: 'Contractor Job Specification Review | Ironworks',
     desc: 'Metal panels, trim, and building material for regional contractors. Send an active or upcoming job for a specification review and reorder-ready pricing.',
     ogImage: 'Real_pictures/8.webp', body: body('contractors'), navScrolled: true, scripts: ['js/forms.js'],
+    lcp: { src: 'Real_pictures/8.webp', sizes: '100vw' },
     schema: crumbs('For Contractors', 'contractors.html'),
   },
   {
@@ -51,8 +81,6 @@ for (const dir of ['site', 'articles']) {
 const STATIC = ['hail-damage-inspection.html'];
 
 // ---------- guards ----------
-const problems = [];
-const warnings = [];
 
 // Meta descriptions: whole sentences, 158 characters max. Enforced here so it can't regress.
 function trimDesc(desc, file) {
@@ -83,7 +111,9 @@ const outputs = new Map();
 for (const p of pages) {
   p.desc = trimDesc(p.desc, p.file);
   if (p.title.length > 70) warnings.push(`${p.file}: title is ${p.title.length} chars (Google shows ~60)`);
-  outputs.set(p.file, cleanLinks(head(p) + nav(p) + p.body + footer(p)));
+  if (p.lcp) p.lcp = { ...p.lcp, srcset: srcsetOf(p.lcp.src) };
+  if (p.body.includes('<!-- GOOGLE_REVIEWS -->')) problems.push(`${p.file}: GOOGLE_REVIEWS placeholder was not rendered`);
+  outputs.set(p.file, cleanLinks(responsive(head(p) + nav(p) + p.body + footer(p), p.file)));
 }
 
 const drafts = new Set(pages.filter((p) => p.draft).map((p) => p.file));
@@ -105,8 +135,11 @@ for (const [file, html] of outputs) {
     const f = href === '/' ? 'index.html' : href.slice(1) + (href.includes('.') ? '' : '.html');
     if (!outputs.has(f) && !STATIC.includes(f) && !fs.existsSync(path.join(ROOT, f))) problems.push(`${file}: broken link → ${href}`);
   }
-  for (const [, src] of html.matchAll(/(?:src|href)="((?:Real_pictures|Brand_assets|Hail_pictures|css|js)\/[^"]+)"/g)) {
+  for (const [, src] of html.matchAll(/(?:src|href)="((?:Real_pictures|Brand_assets|Hail_pictures|css|js|fonts)\/[^"]+)"/g)) {
     if (!fs.existsSync(path.join(ROOT, src))) problems.push(`${file}: missing file → ${src}`);
+  }
+  for (const [, set] of html.matchAll(/\b(?:srcset|imagesrcset)="([^"]+)"/g)) {
+    for (const c of set.split(',')) { const f = c.trim().split(/\s+/)[0]; if (f && !fs.existsSync(path.join(ROOT, f))) problems.push(`${file}: missing srcset file → ${f}`); }
   }
 }
 
@@ -168,6 +201,13 @@ const LEGACY = [
 const vj = JSON.parse(fs.readFileSync(path.join(ROOT, 'vercel.json'), 'utf8'));
 vj.cleanUrls = true;
 vj.redirects = LEGACY;
+// Cache headers. Font files are versioned by name, so they can be immutable; photos keep their names when
+// replaced, so they get a week. (Vercel's default is max-age=0 with revalidation on every view.)
+vj.headers = [
+  { source: '/fonts/(.*)', headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }] },
+  { source: '/Real_pictures/(.*)', headers: [{ key: 'Cache-Control', value: 'public, max-age=604800' }] },
+  { source: '/Brand_assets/(.*)', headers: [{ key: 'Cache-Control', value: 'public, max-age=604800' }] },
+];
 fs.writeFileSync(path.join(ROOT, 'vercel.json'), JSON.stringify(vj, null, 2) + '\n');
 
 console.log(`✓ Built ${outputs.size} pages, sitemap has ${indexable.length} URLs${drafts.size ? `, ${drafts.size} draft(s) awaiting approval: ${[...drafts].join(', ')}` : ''}.`);

@@ -32,9 +32,9 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebSite","name":"Ironworks Metal & Building Supply","url":"https://www.ironworksbuildingsupply.com/"}
   </script>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@500;600;700;800;900&family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="preload" as="image" imagesrcset="Real_pictures/r/9-400.webp 400w, Real_pictures/r/9-640.webp 640w, Real_pictures/r/9-800.webp 800w, Real_pictures/r/9-1080.webp 1080w, Real_pictures/r/9-1280.webp 1280w, Real_pictures/r/9-1448.webp 1448w" imagesizes="100vw" fetchpriority="high"/>
+  <link rel="preload" href="fonts/league-spartan-var.woff2" as="font" type="font/woff2" crossorigin/>
+  <link rel="preload" href="fonts/barlow-400.woff2" as="font" type="font/woff2" crossorigin/>
   <link rel="icon" href="favicon-32.png" sizes="32x32"/>
   <link rel="icon" href="favicon.ico"/>
   <link rel="apple-touch-icon" href="apple-touch-icon.png"/>
@@ -45,7 +45,7 @@
 <!-- ── NAV ── -->
 <nav class="nav" id="nav">
   <a href="/" aria-label="Ironworks home">
-    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo"/>
+    <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="nav-logo" sizes="60px" loading="eager" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" decoding="async"/>
   </a>
   <ul class="nav-links">
     <li class="has-sub">
@@ -97,7 +97,7 @@
 </div>
 <!-- ── HERO ── -->
 <header class="hero">
-  <div class="hero-bg"><img src="Real_pictures/9.webp" alt="Post-frame barndominium at golden hour built by Ironworks"/></div>
+  <div class="hero-bg"><img src="Real_pictures/9.webp" alt="Post-frame barndominium at golden hour built by Ironworks" fetchpriority="high" sizes="100vw" width="1448" height="1086" srcset="Real_pictures/r/9-400.webp 400w, Real_pictures/r/9-640.webp 640w, Real_pictures/r/9-800.webp 800w, Real_pictures/r/9-1080.webp 1080w, Real_pictures/r/9-1280.webp 1280w, Real_pictures/r/9-1448.webp 1448w"/></div>
   <div class="hero-grid" aria-hidden="true"></div>
   <div class="hero-inner">
     <span class="hero-badge"><span class="dot"></span>Morrill, NE · Local Builder. Real Pricing. No Big-Box Guesswork.</span>
@@ -108,7 +108,8 @@
       <a href="/#designer" class="btn btn-line on-dark">Design It in 3D</a>
     </div>
     <div class="hero-trust">
-      <div class="trust-item"><svg width="16" height="16" viewBox="0 0 15 15" fill="none"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z" fill="#F8B123"/></svg>Locally Owned</div>
+      <a href="https://search.google.com/local/reviews?placeid=ChIJA8iOdrVmvUURA1_d6H4LjB0" class="trust-item" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z" fill="#F8B123"/></svg>Read Our Google Reviews</a>
+      <div class="trust-item"><svg width="16" height="16" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M2 6.8L7.5 2.5 13 6.8V13H2V6.8z" stroke="#8B9CAE" stroke-width="1.2" stroke-linejoin="round"/><path d="M6 13V9.2h3V13" stroke="#8B9CAE" stroke-width="1.2"/></svg>Locally Owned</div>
       <div class="trust-item"><svg width="16" height="16" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="#8B9CAE" stroke-width="1.2"/><path d="M7.5 4.5V7.5l2.5 2" stroke="#8B9CAE" stroke-width="1.2" stroke-linecap="round"/></svg>Direct Owner Access</div>
       <div class="trust-item"><svg width="16" height="16" viewBox="0 0 15 15" fill="none"><rect x="2" y="2" width="11" height="11" rx="1" stroke="#8B9CAE" stroke-width="1.2"/><path d="M4.5 7.5l2 2 4-4" stroke="#8B9CAE" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>In-House Rolling</div>
       <div class="trust-item"><svg width="16" height="16" viewBox="0 0 15 15" fill="none"><path d="M7.5 2C5.015 2 3 4.015 3 6.5c0 3.75 4.5 6.5 4.5 6.5S12 10.25 12 6.5C12 4.015 9.985 2 7.5 2z" stroke="#8B9CAE" stroke-width="1.2"/><circle cx="7.5" cy="6.5" r="1.5" stroke="#8B9CAE" stroke-width="1.2"/></svg>NE · WY · CO · SD</div>
@@ -139,7 +140,7 @@
   </div>
   <div class="build-grid">
     <article class="build-card rv">
-      <div class="bc-img"><img src="Real_pictures/6.webp" alt="Tan post-frame barn with carriage doors"/></div>
+      <div class="bc-img"><img src="Real_pictures/6.webp" alt="Tan post-frame barn with carriage doors" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" width="1600" height="900" srcset="Real_pictures/r/6-400.webp 400w, Real_pictures/r/6-640.webp 640w, Real_pictures/r/6-800.webp 800w, Real_pictures/r/6-1080.webp 1080w, Real_pictures/r/6-1280.webp 1280w, Real_pictures/r/6-1600.webp 1600w" loading="lazy" decoding="async"/></div>
       <div class="build-idx">01 / Post-Frame</div>
       <h3 class="build-name">Post-Frame Buildings</h3>
       <p class="build-desc">The most versatile system for ag, commercial, and residential. Strong, fast to build, and cost-effective across large spans.</p>
@@ -154,7 +155,7 @@
       </div>
     </article>
     <article class="build-card rv d1">
-      <div class="bc-img"><img src="Real_pictures/3.webp" alt="Cold-form steel framing under construction"/></div>
+      <div class="bc-img"><img src="Real_pictures/3.webp" alt="Cold-form steel framing under construction" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" width="1600" height="900" srcset="Real_pictures/r/3-400.webp 400w, Real_pictures/r/3-640.webp 640w, Real_pictures/r/3-800.webp 800w, Real_pictures/r/3-1080.webp 1080w, Real_pictures/r/3-1280.webp 1280w, Real_pictures/r/3-1600.webp 1600w" loading="lazy" decoding="async"/></div>
       <div class="build-idx">02 / Cold-Form</div>
       <h3 class="build-name">Cold-Form Steel Kits</h3>
       <p class="build-desc">Engineered steel framing kits that go up fast, for commercial and residential builds.</p>
@@ -169,7 +170,7 @@
       </div>
     </article>
     <article class="build-card rv d2">
-      <div class="bc-img"><img src="Real_pictures/8.webp" alt="Steel building frame going up with crew on site"/></div>
+      <div class="bc-img"><img src="Real_pictures/8.webp" alt="Steel building frame going up with crew on site" sizes="(max-width: 640px) 100vw, (max-width: 1000px) 50vw, 33vw" width="1448" height="1086" srcset="Real_pictures/r/8-400.webp 400w, Real_pictures/r/8-640.webp 640w, Real_pictures/r/8-800.webp 800w, Real_pictures/r/8-1080.webp 1080w, Real_pictures/r/8-1280.webp 1280w, Real_pictures/r/8-1448.webp 1448w" loading="lazy" decoding="async"/></div>
       <div class="build-idx">03 / Red Iron</div>
       <h3 class="build-name">Red Iron Buildings</h3>
       <p class="build-desc">Pre-engineered structural steel, the backbone of large commercial and industrial builds. Serious strength for demanding builds.</p>
@@ -215,7 +216,7 @@
       </div>
     </div>
     <div class="designer-media rv d1">
-      <img src="Real_pictures/7.webp" alt="Cold-form steel arch framing against blue sky"/>
+      <img src="Real_pictures/7.webp" alt="Cold-form steel arch framing against blue sky" sizes="(max-width: 1000px) 100vw, 560px" width="1448" height="1086" srcset="Real_pictures/r/7-400.webp 400w, Real_pictures/r/7-640.webp 640w, Real_pictures/r/7-800.webp 800w, Real_pictures/r/7-1080.webp 1080w, Real_pictures/r/7-1280.webp 1280w, Real_pictures/r/7-1448.webp 1448w" loading="lazy" decoding="async"/>
       <span class="badge"><svg width="15" height="15" viewBox="0 0 44 44" fill="none"><rect x="6" y="6" width="32" height="32" stroke="#F8B123" stroke-width="1.6"/><path d="M18 22h8M22 18v8" stroke="#F8B123" stroke-width="1.8" stroke-linecap="round"/></svg>Design in 3D · Priced Locally</span>
     </div>
   </div>
@@ -228,8 +229,8 @@
     <h2 class="h-sec on-dark xl">Built Local.<br><em>Proven in the Field.</em></h2>
   </div>
   <div class="stats stats-big">
-    <div class="stat rv"><div class="stat-n" data-to="250">0<span class="sfx">+mi</span></div><div class="stat-l">Delivery Range</div></div>
-    <div class="stat rv d1"><div class="stat-n" data-to="4">0</div><div class="stat-l">States Served</div></div>
+    <div class="stat rv"><div class="stat-n" data-to="250"><span class="num">250</span><span class="sfx">+mi</span></div><div class="stat-l">Delivery Range</div></div>
+    <div class="stat rv d1"><div class="stat-n" data-to="4"><span class="num">4</span></div><div class="stat-l">States Served</div></div>
     <div class="stat rv d2"><div class="stat-n txt">In-House</div><div class="stat-l">Panel &amp; Trim Rolling</div></div>
     <div class="stat rv d3"><div class="stat-n txt">1:1</div><div class="stat-l">Direct Owner Access</div></div>
   </div>
@@ -316,15 +317,15 @@
     <h2 class="h-sec">Built Across <em>the Region</em></h2>
   </div>
   <div class="gallery">
-    <div class="g-item wide rv"><img src="Real_pictures/1.webp" alt="Gray post-frame shop in winter"/><span class="g-lbl"><span class="g-idx">01</span>Residential Shop</span></div>
-    <div class="g-item rv d1"><img src="Real_pictures/2.webp" alt="Black post-frame shop with lean-to"/><span class="g-lbl"><span class="g-idx">02</span>Shop / Garage</span></div>
-    <div class="g-item rv d2"><img src="Real_pictures/12.webp" alt="Red gambrel barn with metal roof"/><span class="g-lbl"><span class="g-idx">03</span>Gambrel Barn</span></div>
-    <div class="g-item wide rv"><img src="Real_pictures/10.webp" alt="Cold-form building frame on hillside site"/><span class="g-lbl"><span class="g-idx">04</span>Cold-Form Build, Hillside Site</span></div>
-    <div class="g-item rv d1"><img src="Real_pictures/11.webp" alt="Commercial storage units"/><span class="g-lbl"><span class="g-idx">05</span>Commercial Storage</span></div>
-    <div class="g-item rv d2"><img src="Real_pictures/5.webp" alt="Steel erection crew on scissor lift"/><span class="g-lbl"><span class="g-idx">06</span>The Build</span></div>
-    <div class="g-item rv"><img src="Real_pictures/14.webp" alt="Yellow metal building with red trim"/><span class="g-lbl"><span class="g-idx">07</span>Post-Frame Shop</span></div>
-    <div class="g-item wide rv d1"><img src="Real_pictures/13.webp" alt="Steel frame close-up under overcast sky"/><span class="g-lbl"><span class="g-idx">08</span>Steel Structure</span></div>
-    <div class="g-item rv d2"><img src="Real_pictures/4.webp" alt="Cold-form steel panels interior"/><span class="g-lbl"><span class="g-idx">09</span>Cold-Form Panels</span></div>
+    <div class="g-item wide rv"><img src="Real_pictures/1.webp" alt="Gray post-frame shop in winter" sizes="(max-width: 1000px) 100vw, 600px" width="1448" height="1086" srcset="Real_pictures/r/1-400.webp 400w, Real_pictures/r/1-640.webp 640w, Real_pictures/r/1-800.webp 800w, Real_pictures/r/1-1080.webp 1080w, Real_pictures/r/1-1280.webp 1280w, Real_pictures/r/1-1448.webp 1448w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">01</span>Residential Shop</span></div>
+    <div class="g-item rv d1"><img src="Real_pictures/2.webp" alt="Black post-frame shop with lean-to" sizes="(max-width: 1000px) 50vw, 300px" width="1535" height="1024" srcset="Real_pictures/r/2-400.webp 400w, Real_pictures/r/2-640.webp 640w, Real_pictures/r/2-800.webp 800w, Real_pictures/r/2-1080.webp 1080w, Real_pictures/r/2-1280.webp 1280w, Real_pictures/r/2-1535.webp 1535w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">02</span>Shop / Garage</span></div>
+    <div class="g-item rv d2"><img src="Real_pictures/12.webp" alt="Red gambrel barn with metal roof" sizes="(max-width: 1000px) 50vw, 300px" width="1600" height="900" srcset="Real_pictures/r/12-400.webp 400w, Real_pictures/r/12-640.webp 640w, Real_pictures/r/12-800.webp 800w, Real_pictures/r/12-1080.webp 1080w, Real_pictures/r/12-1280.webp 1280w, Real_pictures/r/12-1600.webp 1600w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">03</span>Gambrel Barn</span></div>
+    <div class="g-item wide rv"><img src="Real_pictures/10.webp" alt="Cold-form building frame on hillside site" sizes="(max-width: 1000px) 100vw, 600px" width="1448" height="1086" srcset="Real_pictures/r/10-400.webp 400w, Real_pictures/r/10-640.webp 640w, Real_pictures/r/10-800.webp 800w, Real_pictures/r/10-1080.webp 1080w, Real_pictures/r/10-1280.webp 1280w, Real_pictures/r/10-1448.webp 1448w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">04</span>Cold-Form Build, Hillside Site</span></div>
+    <div class="g-item rv d1"><img src="Real_pictures/11.webp" alt="Commercial storage units" sizes="(max-width: 1000px) 50vw, 300px" width="1600" height="900" srcset="Real_pictures/r/11-400.webp 400w, Real_pictures/r/11-640.webp 640w, Real_pictures/r/11-800.webp 800w, Real_pictures/r/11-1080.webp 1080w, Real_pictures/r/11-1280.webp 1280w, Real_pictures/r/11-1600.webp 1600w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">05</span>Commercial Storage</span></div>
+    <div class="g-item rv d2"><img src="Real_pictures/5.webp" alt="Steel erection crew on scissor lift" sizes="(max-width: 1000px) 50vw, 300px" width="1448" height="1086" srcset="Real_pictures/r/5-400.webp 400w, Real_pictures/r/5-640.webp 640w, Real_pictures/r/5-800.webp 800w, Real_pictures/r/5-1080.webp 1080w, Real_pictures/r/5-1280.webp 1280w, Real_pictures/r/5-1448.webp 1448w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">06</span>The Build</span></div>
+    <div class="g-item rv"><img src="Real_pictures/14.webp" alt="Yellow metal building with red trim" sizes="(max-width: 1000px) 50vw, 300px" width="1600" height="900" srcset="Real_pictures/r/14-400.webp 400w, Real_pictures/r/14-640.webp 640w, Real_pictures/r/14-800.webp 800w, Real_pictures/r/14-1080.webp 1080w, Real_pictures/r/14-1280.webp 1280w, Real_pictures/r/14-1600.webp 1600w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">07</span>Post-Frame Shop</span></div>
+    <div class="g-item wide rv d1"><img src="Real_pictures/13.webp" alt="Steel frame close-up under overcast sky" sizes="(max-width: 1000px) 100vw, 600px" width="1600" height="900" srcset="Real_pictures/r/13-400.webp 400w, Real_pictures/r/13-640.webp 640w, Real_pictures/r/13-800.webp 800w, Real_pictures/r/13-1080.webp 1080w, Real_pictures/r/13-1280.webp 1280w, Real_pictures/r/13-1600.webp 1600w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">08</span>Steel Structure</span></div>
+    <div class="g-item rv d2"><img src="Real_pictures/4.webp" alt="Cold-form steel panels interior" sizes="(max-width: 1000px) 50vw, 300px" width="1600" height="900" srcset="Real_pictures/r/4-400.webp 400w, Real_pictures/r/4-640.webp 640w, Real_pictures/r/4-800.webp 800w, Real_pictures/r/4-1080.webp 1080w, Real_pictures/r/4-1280.webp 1280w, Real_pictures/r/4-1600.webp 1600w" loading="lazy" decoding="async"/><span class="g-lbl"><span class="g-idx">09</span>Cold-Form Panels</span></div>
   </div>
   <div class="sec-head rv" style="margin-top:36px">
     <a href="/projects" class="btn btn-line">See All Projects <span class="arw">→</span></a>
@@ -335,12 +336,28 @@
 <section class="section zone-paper" id="testimonials">
   <div class="sec-head rv">
     <span class="eyebrow">From Our Customers</span>
-    <h2 class="h-sec">What Contractors <em>Say</em></h2>
+    <h2 class="h-sec">What Customers <em>Say</em></h2>
   </div>
+  <!-- Public Google reviews, rendered from build/facts.mjs → googleReviews(). -->
+  <div class="testi testi-google">
+    <figure class="tcard gcard rv">
+      <div class="gsrc">Google review</div>
+      <div class="stars" role="img" aria-label="5 out of 5 stars"><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg></div>
+      <p>&ldquo;Been getting windbreak tin for livestock panels and facilities for a while now. Good price n product and good people. My go to painted steel roofing as well.&rdquo;</p>
+      <figcaption><div class="who">Nathaniel Miles</div><div class="role"><a href="https://search.google.com/local/reviews?placeid=ChIJA8iOdrVmvUURA1_d6H4LjB0" target="_blank" rel="noopener">Posted on Google · 2026</a></div></figcaption>
+    </figure>
+    <figure class="tcard gcard rv d1">
+      <div class="gsrc">Google review</div>
+      <div class="stars" role="img" aria-label="5 out of 5 stars"><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg><svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123" aria-hidden="true"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg></div>
+      <p>&ldquo;Ryan at Ironworks was great to work with. He handled our shop project from start to finish and made the whole process easy. Excellent service and great people. Highly recommend Ironworks Metal &amp; Building Supply.&rdquo;</p>
+      <figcaption><div class="who">Rachel Wright</div><div class="role"><a href="https://search.google.com/local/reviews?placeid=ChIJA8iOdrVmvUURA1_d6H4LjB0" target="_blank" rel="noopener">Posted on Google · 2026</a></div></figcaption>
+    </figure>
+  </div>
+  <p class="testi-src rv">Shared directly with Ironworks · Published with permission</p>
   <div class="testi">
     <figure class="tcard rv">
       <div class="qmark">&ldquo;</div>
-      <div class="stars">
+      <div class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
@@ -352,7 +369,7 @@
     </figure>
     <figure class="tcard rv d1">
       <div class="qmark">&ldquo;</div>
-      <div class="stars">
+      <div class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
@@ -364,7 +381,7 @@
     </figure>
     <figure class="tcard rv d2">
       <div class="qmark">&ldquo;</div>
-      <div class="stars">
+      <div class="stars" role="img" aria-label="5 out of 5 stars">
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
         <svg width="16" height="16" viewBox="0 0 15 15" fill="#F8B123"><path d="M7.5 1l1.7 3.4L13 5.1l-2.75 2.68.65 3.77L7.5 9.8l-3.4 1.76.65-3.77L2 5.1l3.8-.7L7.5 1z"/></svg>
@@ -374,6 +391,9 @@
       <p>&ldquo;The custom trim work they did for our project was perfect — matched spec exactly. That in-house roller is a game changer.&rdquo;</p>
       <figcaption><div class="who">Rachel S.</div><div class="role">General Contractor, Cheyenne WY</div></figcaption>
     </figure>
+  </div>
+  <div class="sec-head rv" style="margin-top:40px">
+    <a href="https://search.google.com/local/reviews?placeid=ChIJA8iOdrVmvUURA1_d6H4LjB0" class="btn btn-line" target="_blank" rel="noopener">Read All Reviews on Google <span class="arw">→</span></a>
   </div>
 </section>
 
@@ -399,7 +419,7 @@
 <footer class="foot">
   <div class="shell">
     <div>
-      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo"/>
+      <img src="Brand_assets/ironworks-logo.webp" alt="Ironworks Metal &amp; Building Supply" class="foot-logo" sizes="60px" width="700" height="610" srcset="Brand_assets/r/ironworks-logo-120.webp 120w, Brand_assets/r/ironworks-logo-240.webp 240w, Brand_assets/r/ironworks-logo-700.webp 700w" loading="lazy" decoding="async"/>
       <p class="foot-tag">Metal &amp; Building Supply<br>Morrill, Nebraska</p>
       <div class="foot-social">
         <a href="https://www.facebook.com/profile.php?id=61575009470576" target="_blank" rel="noopener" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" fill="#8B9CAE" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>

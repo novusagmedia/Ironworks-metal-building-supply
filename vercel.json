@@ -31,20 +31,29 @@
   ],
   "headers": [
     {
-      "source": "/hail-damage",
+      "source": "/fonts/(.*)",
       "headers": [
         {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
         }
       ]
     },
     {
-      "source": "/hail-damage/:path*",
+      "source": "/Real_pictures/(.*)",
       "headers": [
         {
-          "key": "X-Robots-Tag",
-          "value": "noindex"
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
+        }
+      ]
+    },
+    {
+      "source": "/Brand_assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=604800"
         }
       ]
     }

@@ -7,7 +7,7 @@ export default page({
   desc: 'Custom metal trim rolled on our own sheet-metal roller in Morrill, NE, plus fasteners and hardware. Send your trim profiles and lengths for review.',
   eyebrow: 'Panels & Trim',
   crumb: 'Custom Metal Trim',
-  h1: 'Custom Metal Trim & Hardware',
+  h1: 'Custom Metal Trim & Hardware, Rolled in Morrill, NE',
   lead: 'Custom trim profiles rolled on our own sheet-metal roller, made to the spec your job needs. Fasteners and hardware too.',
   cta: 'contractor',
   ogImage: 'Real_pictures/14.webp',

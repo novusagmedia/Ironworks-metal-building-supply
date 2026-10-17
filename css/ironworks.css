@@ -4,6 +4,17 @@
    Display: League Spartan · Body: Barlow · Utility: Barlow Condensed
    ============================================================ */
 
+/* ---------- FONTS ----------
+   Self-hosted (SIL Open Font License) so no third-party stylesheet blocks the first paint.
+   League Spartan is one variable file covering every weight; the Barlow families are static. */
+@font-face{font-family:'League Spartan';font-style:normal;font-weight:100 900;font-display:swap;src:url(../fonts/league-spartan-var.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:400;font-display:swap;src:url(../fonts/barlow-400.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/barlow-500.woff2) format('woff2')}
+@font-face{font-family:'Barlow';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/barlow-600.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:500;font-display:swap;src:url(../fonts/barlow-condensed-500.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:600;font-display:swap;src:url(../fonts/barlow-condensed-600.woff2) format('woff2')}
+@font-face{font-family:'Barlow Condensed';font-style:normal;font-weight:700;font-display:swap;src:url(../fonts/barlow-condensed-700.woff2) format('woff2')}
+
 /* ---------- TOKENS ---------- */
 :root{
   /* steel canvas */
@@ -49,7 +60,7 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{font-family:var(--fb);background:var(--paper);color:var(--text-dark);overflow-x:hidden;line-height:1.7}
-img{display:block;max-width:100%}
+img{display:block;max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 ::selection{background:var(--gold);color:var(--steel)}
@@ -190,6 +201,10 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .hero-trust{margin-top:40px;display:flex;flex-wrap:wrap;gap:26px 40px;padding-top:26px;border-top:1px solid var(--line-dark)}
 .trust-item{display:flex;align-items:center;gap:10px;font-family:var(--fc);font-weight:600;font-size:13px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.72)}
 .trust-item svg{flex:none}
+a.trust-item{color:#fff;text-decoration:underline;text-decoration-color:var(--gold-line);text-decoration-thickness:1px;text-underline-offset:5px;border-radius:2px;transition:color .3s var(--ease)}
+a.trust-item:hover{color:var(--gold)}
+a.trust-item:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+a.trust-item:active{opacity:.7}
 
 /* ---------- AREA STRIP ---------- */
 .area{background:var(--steel);color:rgba(255,255,255,.75);border-top:1px solid var(--line-dark)}
@@ -290,6 +305,17 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 .tcard p{font-size:15.5px;line-height:1.7;color:var(--text-dark)}
 .tcard .who{margin-top:20px;font-family:var(--fd);font-weight:700;font-size:16px;color:var(--steel)}
 .tcard .role{font-family:var(--fc);font-weight:500;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted);margin-top:3px}
+/* Provenance is the structure of this section: a verifiable Google row first, then direct quotes under a label. */
+.testi.testi-google{grid-template-columns:repeat(2,1fr)}
+.gcard{border-top:3px solid var(--gold)}
+.gcard .gsrc{font-family:var(--fc);font-weight:700;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep)}
+.gcard .role a{color:inherit;text-decoration:underline;text-decoration-color:var(--gold-line);text-underline-offset:3px;transition:color .3s var(--ease)}
+.gcard .role a:hover{color:var(--steel)}
+.gcard .role a:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.gcard .role a:active{opacity:.7}
+.testi-src{max-width:var(--maxw);margin:36px auto 0;padding:0 var(--edge);display:flex;align-items:center;gap:14px;font-family:var(--fc);font-weight:600;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--text-muted)}
+.testi-src::after{content:"";flex:1;height:1px;background:var(--line-light)}
+.testi-src + .testi{margin-top:18px}
 
 /* ---------- FINAL CTA ---------- */
 .finalcta{position:relative;overflow:hidden;text-align:center;padding:clamp(80px,13vh,150px) 0}
@@ -382,7 +408,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none}
 @media(max-width:640px){
   .nav-links,.nav-cta{display:none}
   .hamburger{display:flex}
-  .build-grid,.serve-grid,.testi,.values{grid-template-columns:1fr}
+  .build-grid,.serve-grid,.testi,.testi.testi-google,.values{grid-template-columns:1fr}
   .stats{grid-template-columns:1fr 1fr}
   .stat::after{display:none}
   .foot .shell,.foot-bottom .shell{grid-template-columns:1fr;flex-direction:column}
